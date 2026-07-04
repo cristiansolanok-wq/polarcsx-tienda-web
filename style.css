@@ -12,28 +12,7 @@ body {
     padding-top: 120px;
 }
 
-.hero-container{
-    width:100%;
-    max-width:1200px;
-    margin:0 auto;
-    text-align:center;
-    padding:5px 20px;
-}
 
-.logo-hero{
-    padding:0;
-    margin:0;
-}
-.logo-img-hero{
-    width:380px;
-    max-width:90%;
-    height:auto;
-    display:block;
-}
-
-.logo-hero {
-    background-color: transparent !important; /* Asegura que el contenedor no pinte nada */
-}
 
 .welcome-text h1 {
     color: white;
@@ -69,29 +48,12 @@ body {
     z-index: 2;
 }
 
-.logo-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    padding: 10px 14px;
-    border-radius: 16px;
-    border: 1px solid rgba(255,255,255,0.14);
-    background: rgba(255,255,255,0.06);
-    transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
-}
+
 
 .logo-link:hover {
     transform: translateY(-2px);
     background: rgba(255,255,255,0.12);
     box-shadow: 0 16px 32px rgba(0,0,0,0.18);
-}
-
-.logo-img {
-    width: 60px; /* Ajusta el tamaño del logo para que sea pequeño y elegante */
-    height: 60px;
-    border-radius: 50%;
-    margin-bottom: 0;
-    border: 2px solid #fff;
 }
 
 .welcome-box h1 {
@@ -105,23 +67,6 @@ body {
     margin: 0;
 }
 
-.logo-text {
-    font-size: 28px;
-    font-weight: bold;
-    letter-spacing: 2px;
-}
-
-/* Banner */
-
-.hero-banner h1 {
-    font-size: 48px;
-    margin-bottom: 10px;
-}
-
-.hero-banner p {
-    font-size: 18px;
-    color: #a0a0a0;
-}
 
 /* Catálogo y Acordeón */
 
@@ -392,28 +337,6 @@ body {
 }
 
 
-/* LOGO */
-.logo{
-    display:flex;
-    align-items:center;
-    gap:12px;
-    position:relative;
-    padding-right:10px;
-}
-
-/* EFECTO VISUAL SUAVE (no invade el diseño) */
-.logo::after{
-    content:"";
-    position:absolute;
-    right:-10px;
-    top:50%;
-    transform:translateY(-50%);
-    width:40px;
-    height:2px;
-    background:linear-gradient(90deg,#25D366,transparent);
-    opacity:.18;
-}
-
 /* IMAGEN LOGO */
 .logo-img {
     width: 55px;
@@ -494,50 +417,8 @@ header .btn-header{
     background:#1ebd57;
     transform:scale(1.05);
 }
-/* HERO */
 
-.hero {
-    text-align: center;
-    padding: 70px 20px;
-    background: linear-gradient(180deg, #0f0f0f, #1a1a1a, #0d0d0d);
-    color: #f2f2f2;
-}
 
-/* TÍTULO PRINCIPAL */
-.hero h2 {
-    font-size: 2.6rem;
-    margin-bottom: 15px;
-    color: #f2f2f2;
-    font-weight: 700;
-    letter-spacing: 0.5px;
-}
-
-/* TEXTO SECUNDARIO */
-.hero p {
-    font-size: 1.1rem;
-    max-width: 650px;
-    margin: 0 auto 25px auto;
-    line-height: 1.6;
-    color: #cfcfcf;
-}
-
-/* BOTÓN PRINCIPAL */
-.btn-principal {
-    display: inline-block;
-    padding: 13px 32px;
-    background: linear-gradient(90deg, #ff007f, #ff4fd8);
-    color: white;
-    text-decoration: none;
-    border-radius: 30px;
-    font-weight: bold;
-    transition: .3s;
-    box-shadow: 0 0 18px rgba(255, 0, 127, .25);
-}
-
-.btn-principal:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 0 28px rgba(255, 0, 127, .35);
-}
 
 /* ========================= */
 /* BOTÓN WHATSAPP */
@@ -563,13 +444,6 @@ header .btn-header{
 .btn-whatsapp:hover{
     transform: translateY(-1px);
     box-shadow: 0 0 20px rgba(37,211,102,.35);
-}
-
-.product-details {
-    color: #d1d1d1;
-    line-height: 1.75;
-    margin-bottom: 22px;
-    font-size: 1rem;
 }
 
 
@@ -630,16 +504,6 @@ margin:auto;
 .nosotros p{
 line-height:1.8;
 color:#d6d6d6;
-}
-
-.contacto{
-padding:80px 20px;
-text-align:center;
-}
-
-.contacto h2{
-font-size:3rem;
-margin-bottom:30px;
 }
 
 .redes{
