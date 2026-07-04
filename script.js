@@ -1,0 +1,467 @@
+function toggleAccordion(element) {
+    // Función obsoleta - mantener vacía para compatibilidad
+    console.warn('[DEPRECATED] toggleAccordion() is no longer used. Use product viewer instead.');
+}
+
+// ========================================
+// PRODUCT VIEWER STATE
+// ========================================
+const viewerState = {
+    isOpen: false,
+    scrollPosition: 0,
+    currentProductElement: null,
+};
+
+// ========================================
+// PRODUCT VIEWER - EXTRACT DATA
+// ========================================
+function extractProductData(cardElement) {
+    const title = cardElement.querySelector('.product-basic-info h3')?.textContent.trim() || 'Producto';
+    const priceText = cardElement.querySelector('.price')?.textContent.trim() || '$0.00';
+    const imageEl = cardElement.querySelector('img.product-img');
+    const imageSrc = imageEl?.src || '';
+    const category = cardElement.dataset.category || 'General';
+    const productId = cardElement.dataset.productId || slugify(title);
+
+    // Extract description
+    const descriptionEl = cardElement.querySelector('.product-description');
+    let description = '';
+    if (descriptionEl) {
+        const paraEl = descriptionEl.querySelector('p:first-of-type');
+        description = paraEl?.innerHTML.trim() || '';
+    }
+
+    // Extract benefits (ul with li items)
+    let benefits = [];
+    const benefitsUl = cardElement.querySelector('.product-description ul');
+    if (benefitsUl) {
+        benefits = Array.from(benefitsUl.querySelectorAll('li')).map(li => 
+            li.textContent.replace(/^•\s*/, '').trim()
+        );
+    }
+
+    // Extract rating
+    const starEl = cardElement.querySelector('.star-rating');
+    let rating = '5.0';
+    let reviewCount = '0';
+    if (starEl) {
+        const ratingText = starEl.textContent.match(/[\d.]+\s*de\s*5/);
+        if (ratingText) rating = ratingText[0].split(' ')[0];
+        const countText = starEl.textContent.match(/\(([0-9,]+)/);
+        if (countText) reviewCount = countText[1];
+    }
+
+    // Extract comments
+    let comments = [];
+    const commentEls = cardElement.querySelectorAll('.comment');
+    if (commentEls.length > 0) {
+        comments = Array.from(commentEls).map(c => {
+            const userEl = c.querySelector('.user');
+            const userName = userEl?.textContent.trim() || 'Usuario';
+            const commentText = c.textContent.replace(userName, '').trim().substring(2); // Remove "- "
+            return { name: userName, text: commentText };
+        });
+    }
+
+    return {
+        id: productId,
+        title,
+        priceText,
+        price: parsePriceText(priceText),
+        imageSrc,
+        category,
+        description,
+        benefits,
+        rating: parseFloat(rating),
+        reviewCount,
+        comments,
+    };
+}
+
+// ========================================
+// PRODUCT VIEWER - PRICE PARSER
+// ========================================
+function parsePriceText(priceText) {
+    if (!priceText) return 0;
+    let cleaned = priceText.replace(/[^0-9.,]/g, '');
+    const hasComma = cleaned.includes(',');
+    const hasDot = cleaned.includes('.');
+
+    if (hasComma && hasDot) {
+        cleaned = cleaned.replace(/,/g, '');
+    } else if (hasComma && !hasDot) {
+        cleaned = cleaned.replace(/,/g, '.');
+    }
+
+    const parsed = parseFloat(cleaned);
+    return Number.isFinite(parsed) ? parsed : 0;
+}
+
+// ========================================
+// PRODUCT VIEWER - SLUG GENERATOR
+// ========================================
+function slugify(text) {
+    return text
+        .toString()
+        .trim()
+        .toLowerCase()
+        .replace(/\s+/g, '-')
+        .replace(/[^a-z0-9-]/g, '')
+        .replace(/-+/g, '-');
+}
+
+// ========================================
+// PRODUCT VIEWER - RENDER
+// ========================================
+function renderProductViewer(productData) {
+    const modal = document.getElementById('product-modal');
+    const modalBody = document.getElementById('modal-body');
+
+    if (!modal || !modalBody) {
+        console.error('Modal elements not found');
+        return;
+    }
+
+    // Build stars HTML
+    const starsHtml = '★'.repeat(Math.round(productData.rating)) + 
+                      '☆'.repeat(5 - Math.round(productData.rating));
+
+    // Build benefits HTML
+    let benefitsHtml = '';
+    if (productData.benefits.length > 0) {
+        benefitsHtml = `
+            <div class="viewer-benefits">
+                <h4>Puntos clave de bienestar:</h4>
+                <ul>
+                    ${productData.benefits.map(b => `<li>${b}</li>`).join('')}
+                </ul>
+            </div>
+        `;
+    }
+
+    // Build comments HTML
+    let commentsHtml = '';
+    if (productData.comments.length > 0) {
+        commentsHtml = `
+            <div class="viewer-comments">
+                <h4>Comentarios de compradores</h4>
+                ${productData.comments.map(c => `
+                    <div class="viewer-comment-item">
+                        <span class="viewer-comment-author">${c.name}</span>
+                        <span class="viewer-comment-text">${c.text}</span>
+                    </div>
+                `).join('')}
+            </div>
+        `;
+    }
+
+    // Render complete viewer
+    modalBody.innerHTML = `
+        <div class="viewer-card">
+            <div class="viewer-image-section">
+                <div class="viewer-image">
+                    <img src="${productData.imageSrc}" alt="${productData.title}">
+                </div>
+            </div>
+            <div class="viewer-info">
+                <div class="viewer-header">
+                    <span class="viewer-category">${productData.category}</span>
+                    <h2 class="viewer-title">${productData.title}</h2>
+                    <div class="viewer-rating">
+                        <span class="viewer-stars">${starsHtml}</span>
+                        <span class="viewer-rating-text">(${productData.reviewCount} opiniones)</span>
+                    </div>
+                </div>
+                
+                <div class="viewer-price">${productData.priceText}</div>
+                
+                <div class="viewer-description">${productData.description}</div>
+                
+                ${benefitsHtml}
+                
+                ${commentsHtml}
+                
+                <div class="viewer-actions">
+                    <button class="viewer-buy-btn" onclick="addToCart('${productData.title.replace(/'/g, "\\'")}', ${productData.price}, '${productData.id}'); closeProductViewer();">
+                        Comprar ahora
+                    </button>
+                    <button class="viewer-cart-btn" onclick="addToCart('${productData.title.replace(/'/g, "\\'")}', ${productData.price}, '${productData.id}'); closeProductViewer();">
+                        Añadir al carrito
+                    </button>
+                </div>
+                
+                <p class="viewer-hint">Toca cualquier parte fuera del producto para continuar.</p>
+            </div>
+        </div>
+    `;
+
+    // Show modal with animation
+    modal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    viewerState.isOpen = true;
+}
+
+// ========================================
+// PRODUCT VIEWER - OPEN
+// ========================================
+function openProductViewer(cardElement) {
+    if (viewerState.isOpen) return;
+
+    // Save current scroll position
+    viewerState.scrollPosition = window.scrollY || window.pageYOffset;
+    viewerState.currentProductElement = cardElement;
+
+    // Extract product data from card
+    const productData = extractProductData(cardElement);
+
+    // Render viewer
+    renderProductViewer(productData);
+}
+
+// ========================================
+// PRODUCT VIEWER - CLOSE
+// ========================================
+function closeProductViewer() {
+    const modal = document.getElementById('product-modal');
+    if (!modal || !viewerState.isOpen) return;
+
+    modal.classList.remove('open');
+    document.body.style.overflow = '';
+    viewerState.isOpen = false;
+
+    // Restore scroll position with small delay for smooth animation
+    setTimeout(() => {
+        window.scrollTo(0, viewerState.scrollPosition);
+    }, 50);
+}
+
+// ========================================
+// PRODUCT VIEWER - INITIALIZE
+// ========================================
+function initializeProductViewer() {
+    const modal = document.getElementById('product-modal');
+    const modalContent = document.querySelector('.modal-content');
+
+    // Handle product card clicks
+    document.querySelectorAll('.product-summary').forEach(summary => {
+        // Remove old listeners by cloning
+        const newSummary = summary.cloneNode(true);
+        summary.replaceWith(newSummary);
+    });
+
+    // Re-attach listeners to fresh elements
+    document.querySelectorAll('.product-summary').forEach(summary => {
+        summary.addEventListener('click', event => {
+            event.preventDefault();
+            event.stopPropagation();
+            const cardElement = summary.closest('.product-card');
+            if (cardElement) {
+                openProductViewer(cardElement);
+            }
+        });
+    });
+
+    if (!modal) return;
+
+    // Close on background click
+    modal.addEventListener('click', event => {
+        if (event.target === modal) {
+            closeProductViewer();
+        }
+    });
+
+    // Close on Escape key
+    document.addEventListener('keydown', event => {
+        if (event.key === 'Escape' && viewerState.isOpen) {
+            closeProductViewer();
+        }
+    });
+
+    // Close on button click
+    const closeBtn = modal.querySelector('.close-btn');
+    if (closeBtn) {
+        closeBtn.addEventListener('click', closeProductViewer);
+    }
+
+    console.log('✓ Product viewer initialized successfully');
+}
+
+
+function filterCategory(category) {
+    const buttons = document.querySelectorAll('.category-btn');
+    const cards = document.querySelectorAll('.product-card');
+
+    buttons.forEach(button => {
+        button.classList.toggle('active', button.dataset.category === category);
+    });
+
+    cards.forEach(card => {
+        const cardCategory = card.dataset.category;
+        const details = card.querySelector('.product-details');
+
+        if (category === 'all' || cardCategory === category) {
+            card.style.display = '';
+        } else {
+            card.style.display = 'none';
+            card.classList.remove('active');
+            if (details) {
+                details.style.maxHeight = null;
+            }
+        }
+    });
+}
+
+// Inicializa mostrando todos los productos al cargar la página
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => {
+        filterCategory('all');
+        updateCartUI();
+        initializeProductViewer();
+        initializeLogoScroll();
+    });
+} else {
+    filterCategory('all');
+    updateCartUI();
+    initializeProductViewer();
+    initializeLogoScroll();
+}
+
+let cart = [];
+try {
+    cart = JSON.parse(localStorage.getItem('polarcsx_cart')) || [];
+} catch (error) {
+    cart = [];
+}
+
+function saveCart() {
+    localStorage.setItem('polarcsx_cart', JSON.stringify(cart));
+}
+
+function addToCart(name, price, id) {
+    const existingItem = cart.find(item => item.id === id);
+    if (existingItem) {
+        existingItem.quantity += 1;
+    } else {
+        cart.push({ id: id, name: name, price: parseFloat(price), quantity: 1 });
+    }
+    saveCart();
+    updateCartUI();
+    
+    // Animar el FAB con pulso
+    const fabBtn = document.getElementById('fab-cart-btn');
+    if (fabBtn) {
+        fabBtn.classList.remove('pulse-animation');
+        // Trigger reflow para reiniciar la animación
+        void fabBtn.offsetWidth;
+        fabBtn.classList.add('pulse-animation');
+    }
+}
+
+function updateCartUI() {
+    const cartCountElement = document.getElementById('cart-count');
+    const fabCartCount = document.getElementById('fab-cart-count');
+    const cartItemsContainer = document.getElementById('cart-items');
+    const cartItemsModal = document.getElementById('cart-items-modal');
+    const cartTotalElement = document.getElementById('cart-total');
+    const cartTotalModal = document.getElementById('cart-total-modal');
+    
+    // --- LIMPIEZA DE CONTENEDORES (FIX) ---
+    if (cartItemsContainer) cartItemsContainer.innerHTML = '';
+    if (cartItemsModal) cartItemsModal.innerHTML = '';
+    // --------------------------------------
+    
+    const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+    if (cartCountElement) cartCountElement.textContent = totalItems;
+    if (fabCartCount) fabCartCount.textContent = totalItems;
+    
+    const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+    if (cartTotalElement) cartTotalElement.textContent = `$${totalPrice.toFixed(2)} MXN`;
+    if (cartTotalModal) cartTotalModal.textContent = `$${totalPrice.toFixed(2)} MXN`;
+    
+    const emptyMsg = '<div class="empty-cart">El carrito está vacío.</div>';
+    if (cart.length === 0) {
+        if (cartItemsContainer) cartItemsContainer.innerHTML = emptyMsg;
+        if (cartItemsModal) cartItemsModal.innerHTML = emptyMsg;
+        return;
+    }
+    
+    cart.forEach(item => {
+        const itemRow = document.createElement('div');
+        itemRow.className = 'cart-item';
+        itemRow.innerHTML = `
+            <div class="cart-item-info">
+                <p class="cart-item-name">${item.name} (x${item.quantity})</p>
+                <p class="cart-item-price">$${(item.price * item.quantity).toFixed(2)} MXN</p>
+            </div>
+            <button class="cart-item-remove" onclick="removeFromCart('${item.id}')">✕</button>
+        `;
+        
+        // Agregar al contenedor principal y al modal
+        if (cartItemsContainer) cartItemsContainer.appendChild(itemRow);
+        if (cartItemsModal) {
+            cartItemsModal.appendChild(itemRow.cloneNode(true));
+        }
+    });
+}
+function removeFromCart(id) {
+    cart = cart.filter(item => item.id !== id);
+    saveCart();
+    updateCartUI();
+}
+
+function toggleCart() {
+    const cartModal = document.getElementById('cart-modal');
+    if (!cartModal) return;
+    
+    if (cartModal.classList.contains('open')) {
+        closeCartModal();
+    } else {
+        openCartModal();
+    }
+}
+
+function openCartModal() {
+    const cartModal = document.getElementById('cart-modal');
+    if (!cartModal) return;
+    
+    cartModal.classList.add('open');
+}
+
+function closeCartModal() {
+    const cartModal = document.getElementById('cart-modal');
+    if (!cartModal) return;
+    
+    cartModal.classList.remove('open');
+}
+
+function sendWhatsAppOrder() {
+    if (cart.length === 0) {
+        alert('Tu carrito está vacío.');
+        return;
+    }
+    let message = '¡Hola Polarcsx Store! Me interesa realizar el siguiente pedido:\n\n';
+    cart.forEach(item => {
+        message += `• ${item.name} (x${item.quantity}) - $${(item.price * item.quantity).toFixed(2)} MXN\n`;
+    });
+    const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+    message += `\n*Total estimado:* $${totalPrice.toFixed(2)} MXN\n`;
+    
+    const whatsappUrl = `https://wa.me/529361577100?text=${encodeURIComponent(message)}`;
+    window.open(whatsappUrl, '_blank');
+}
+
+// ========================================
+// LOGO SCROLL SUAVE AL INICIO
+// ========================================
+function initializeLogoScroll() {
+    const logoLink = document.getElementById('logo-link');
+    if (logoLink) {
+        logoLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    }
+}

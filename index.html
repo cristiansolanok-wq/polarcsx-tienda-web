@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Polarcsx Store</title>
+
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+
+<body>
+
+<header class="top-band">
+    <div class="band-content">
+        <div class="logo-box">
+<a href="index.html" id="logo-link" class="logo-link" title="Ir al inicio">
+    <img src="img/logo.jpeg" alt="Logo Polarcsx" class="logo-img">
+    <span class="logo-hint">Inicio</span>
+</a>
+        </div>
+        <div class="welcome-box">
+            <h1>Bienvenidos</h1>
+            <p>Descubre nuestra selección exclusiva.</p>
+        </div>
+    </div>
+</header>
+<div class="catalog-section">
+    <h2 class="catalog-title">| Catálogo de Productos</h2>
+    
+    <div class="categories-bar">
+        <div class="categories-left">
+            <span class="categories-label">| CATEGORÍAS</span>
+            <div class="category-list">
+                <button class="category-btn active" data-category="all" onclick="filterCategory('all')"><i class="fa-solid fa-th-large"></i> Todos</button>
+                <button class="category-btn" data-category="4life" onclick="filterCategory('4life')"><i class="fa-solid fa-heart-pulse"></i> 4life</button>
+                <button class="category-btn" data-category="accesorios" onclick="filterCategory('accesorios')"><i class="fa-solid fa-headphones"></i> Accesorios</button>
+                <button class="category-btn" data-category="postres" onclick="filterCategory('postres')"><i class="fa-solid fa-birthday-cake"></i> Postres</button>
+                <button class="category-btn" data-category="servicios" onclick="filterCategory('servicios')"><i class="fa-solid fa-laptop-code"></i> Servicios</button>
+            </div>
+        </div>
+
+        <button class="category-btn cart-btn-special" id="cart-toggle-btn" onclick="toggleCart()">
+            <i class="fa-solid fa-shopping-cart"></i> Carrito (<span id="cart-count">0</span>)
+        </button>
+    </div>
+</div>
+<div id="cart-modal" class="cart-modal">
+    <div class="cart-modal-overlay" onclick="closeCartModal()"></div>
+    <div class="cart-modal-content">
+        <div class="cart-modal-header">
+            <h3>Tu Carrito de Compras</h3>
+            <button class="cart-modal-close" onclick="closeCartModal()">×</button>
+        </div>
+        <div id="cart-items-modal" class="cart-modal-items">
+            <p class="empty-cart-msg">El carrito está vacío.</p>
+        </div>
+        <div class="cart-modal-summary">
+            <p>Total: <span id="cart-total-modal">$0.00 MXN</span></p>
+            <button class="checkout-btn" onclick="sendWhatsAppOrder()">Confirmar Pedido por WhatsApp</button>
+        </div>
+    </div>
+</div>
+
+<!----------------------------------------------------------------- Plantilla de acordeon oficial -->
+
+<div class="products-grid">
+
+<div class="product-card" data-category="4life" data-product-id="4life-belle-vie">
+    <div class="product-summary">
+        <div class="product-image-container">
+            <img src="img/bellevie.jpeg" alt="4life Belle vie" class="product-img">
+        </div>
+        <div class="product-basic-info">
+            <h3>4life Belle vie</h3>
+            <p class="product-subtitle">"polarcsx-store" salud femenina</p>
+            <p class="price">$1,121.00 MXN*</p>
+        </div>
+        <span class="expand-icon">▼</span>
+    </div>
+    <div class="product-details">
+        <div class="details-content"></div>
+            <div class="product-description">
+    <p><strong>¿Para qué sirve?</strong><br> 
+    Respaldo nutricional de alta calidad diseñado para promover la salud integral, el equilibrio hormonal y el bienestar óptimo del sistema reproductor femenino.</p>
+    
+    <p><strong>Puntos clave de bienestar:</strong></p>
+    <ul>
+        <li>• Respaldo específico para la salud de los senos y el sistema ginecológico.</li>
+        <li>• Promueve la longevidad celular y una respuesta inmunitaria saludable.</li>
+        <li>• Coadyuvante en el manejo de los síntomas del ciclo menstrual y la menopausia.</li>
+        <li>• Apoya la regulación y el balance hormonal de forma natural.</li>
+
+    </ul>
+
+    <p><small><em>* Nota: El precio mostrado es de referencia. El costo final puede variar ligeramente dependiendo de tu región o zona de envío. ¡Te confirmamos el total al momento de tu pedido!</em></small></p>
+    <div class="star-rating" style="color: #FFD700; font-size: 20px; margin-bottom: 5px;">
+    ★★★★★ <span style="color: #fff; font-size: 14px; margin-left: 5px;">(4.9 de 5)</span> 
+    <h4>Comentarios de compradores</h4>
+    <div class="comment">
+        <span class="user">Elena R.</span> - Excelente atención, el producto llegó sellado, con lote vigente y súper rápido.
+    </div>
+    <div class="comment">
+        <span class="user">Sofía M.</span> - Muy confiable la tienda. Me asesoraron perfectamente con el uso y las dosis. ¡Recomendados!
+    </div>
+    <button class="buy-btn" onclick="addToCart('4life Belle vie', 1121.00, '4life-belle-vie')">
+        Añadir al carrito
+    </button>
+</div>
+</div>
+</div>  
+    </div>    
+    <!---------------------------------------------------  ---------------------------  --> 
+
+<div class="product-card" data-category="4life">
+    <div class="product-summary">
+        <div class="product-image-container">
+            <img src="img/4life.jpeg" alt="4LIFE TRANSFER" class="product-img">
+        </div>
+        <div class="product-basic-info">
+            <h3>4life Transfer factor plus</h3>
+            <p class="product-subtitle">"polarcsx-store" Sistema inmunologico</p>
+            <p class="price">$1,339.00 MXN*</p>
+        </div>
+        <span class="expand-icon">▼</span>
+    </div>
+    <div class="product-details">
+        <div class="details-content"></div>
+            <div class="product-description">
+    <p><strong>¿Para qué sirve?</strong><br> 
+    Respaldo nutricional de alta calidad diseñado para promover la salud integral, el equilibrio hormonal y el bienestar óptimo del sistema reproductor femenino.</p>
+    
+    <p><strong>Puntos clave de bienestar:</strong></p>
+    <ul>
+        <li>• Apoyo integral al sistema inmunológico y sus funciones naturales.</li>
+<li>• Contribuye al mantenimiento de defensas equilibradas en el organismo.</li>
+<li>• Apoya la respuesta del cuerpo frente a desafíos externos del entorno.</li>
+<li>• Favorece el bienestar general en etapas de alta exigencia física.</li>
+<li>• Contribuye al equilibrio interno del organismo en el día a día.</li>
+<li>• Apoyo general para procesos de recuperación y vitalidad corporal.</li>
+<li>• Ideal como complemento dentro de un estilo de vida saludable.</li>
+
+    </ul>
+
+    <p><small><em>* Nota: El precio mostrado es de referencia. El costo final puede variar ligeramente dependiendo de tu región o zona de envío. ¡Te confirmamos el total al momento de tu pedido!</em></small></p>
+    <div class="star-rating" style="color: #FFD700; font-size: 20px; margin-bottom: 5px;">
+    ★★★★★ <span style="color: #fff; font-size: 14px; margin-left: 5px;">(4.9 de 5)</span> 
+    <h4>Comentarios de compradores</h4>
+    <div class="comment">
+        <span class="user">Elena R.</span> - Excelente atención, el producto llegó sellado, con lote vigente y súper rápido.
+    </div>
+    <div class="comment">
+        <span class="user">Sofía M.</span> - Muy confiable la tienda. Me asesoraron perfectamente con el uso y la toma. ¡excelente!
+    </div> <div class="comment">
+    <span class="user">david M.</span> - Muy confiable la tienda. Me asesoraron perfectamente 100% recomendado!
+    </div>
+<button class="buy-btn" onclick="addToCart('4life Transfer factor plus', 1339.00, '4life-transfer-factor-plus')">
+        Añadir al carrito
+    </button>
+</div>
+</div>
+    </div>
+</div>
+
+<!------------------------------------------------------------------------------------------------------------->
+
+<div class="product-card" data-category="4life">
+    <div class="product-summary">
+        <div class="product-image-container">
+            <img src="img/gold.jpeg" alt="4life gold factor" class="product-img">
+        </div>
+        <div class="product-basic-info">
+            <h3>4life Gold factor</h3>
+            <p class="product-subtitle">"polarcsx-store" Sistema inmunologico</p>
+            <p class="price">$1,359.00 MXN*</p>
+        </div>
+        <span class="expand-icon">▼</span>
+    </div>
+    <div class="product-details">
+        <div class="details-content"></div>
+            <div class="product-description">
+    <p><strong>¿Para qué sirve?</strong><br> 
+    Respaldo nutricional de alta calidad diseñado para promover la salud integral, el equilibrio hormonal y el bienestar óptimo del sistema reproductor femenino.</p>
+    
+    <p><strong>Puntos clave de bienestar:</strong></p>
+    <ul>
+        <li>• Apoyo integral al sistema inmunológico y sus funciones naturales.</li>
+<li>• Contribuye al mantenimiento de defensas equilibradas en el organismo.</li>
+<li>• Apoya la respuesta del cuerpo frente a desafíos externos del entorno.</li>
+<li>• Favorece el bienestar general en etapas de alta exigencia física.</li>
+<li>• Contribuye al equilibrio interno del organismo en el día a día.</li>
+<li>• Apoyo general para procesos de recuperación y vitalidad corporal.</li>
+<li>• Ideal como complemento dentro de un estilo de vida saludable.</li>
+
+    </ul>
+
+    <p><small><em>* Nota: El precio mostrado es de referencia. El costo final puede variar ligeramente dependiendo de tu región o zona de envío. ¡Te confirmamos el total al momento de tu pedido!</em></small></p>
+    <div class="star-rating" style="color: #FFD700; font-size: 20px; margin-bottom: 5px;">
+    ★★★★★ <span style="color: #fff; font-size: 14px; margin-left: 5px;">(4.9 de 5)</span> 
+    <h4>Comentarios de compradores</h4>
+    <div class="comment">
+        <span class="user">Elena R.</span> - Excelente atención, el producto llegó sellado, con lote vigente y súper rápido.
+    </div>
+    <div class="comment">
+        <span class="user">Sofía M.</span> - Muy confiable la tienda. Me asesoraron perfectamente con el uso y la toma. ¡excelente!
+    </div>
+<div class="comment">
+    <span class="user">david M.</span> - Muy confiable la tienda. Me asesoraron perfectamente 100% recomendado!
+    </div>
+    <button class="buy-btn" onclick="addToCart('4life Gold factor', 1359.00, '4life-gold-factor')">
+        Añadir al carrito
+    </button>
+</div>
+</div>
+    </div>
+</div>
+
+<!------------------------------------------------------------------------------------------------------->
+
+<div class="product-card" data-category="4life">
+    <div class="product-summary">
+        <div class="product-image-container">
+            <img src="img/riovida.jpeg" alt="4life Rio vida" class="product-img">
+        </div>
+        <div class="product-basic-info">
+            <h3>4life Rio vida</h3>
+            <p class="product-subtitle">"polarcsx-store" Sistema inmunologico</p>
+            <p class="price">$712.00 MXN*</p>
+        </div>
+        <span class="expand-icon">▼</span>
+    </div>
+    <div class="product-details">
+        <div class="details-content"></div>
+            <div class="product-description">
+    <p><strong>¿Para qué sirve?</strong><br> 
+    Respaldo nutricional de alta calidad diseñado para promover la salud integral, el equilibrio hormonal y el bienestar óptimo del sistema reproductor femenino.</p>
+    
+    <p><strong>Puntos clave de bienestar:</strong></p>
+    <ul>
+        <li>• Apoyo integral al sistema inmunológico y sus funciones naturales.</li>
+<li>• Contribuye al mantenimiento de defensas equilibradas en el organismo.</li>
+<li>• Apoya la respuesta del cuerpo frente a desafíos externos del entorno.</li>
+<li>• Favorece el bienestar general en etapas de alta exigencia física.</li>
+<li>• Contribuye al equilibrio interno del organismo en el día a día.</li>
+<li>• Apoyo general para procesos de recuperación y vitalidad corporal.</li>
+<li>• Ideal como complemento dentro de un estilo de vida saludable.</li>
+
+    </ul>
+
+    <p><small><em>* Nota: El precio mostrado es de referencia. El costo final puede variar ligeramente dependiendo de tu región o zona de envío. ¡Te confirmamos el total al momento de tu pedido!</em></small></p>
+    <div class="star-rating" style="color: #FFD700; font-size: 20px; margin-bottom: 5px;">
+    ★★★★★ <span style="color: #fff; font-size: 14px; margin-left: 5px;">(4.9 de 5)</span> 
+    <h4>Comentarios de compradores</h4>
+    <div class="comment">
+        <span class="user">Elena R.</span> - Excelente atención, el producto llegó sellado, con lote vigente y súper rápido.
+    </div>
+    <div class="comment">
+        <span class="user">Sofía M.</span> - Muy confiable la tienda. Me asesoraron perfectamente con el uso y la toma. ¡excelente!
+    </div>     <div class="comment">
+    <span class="user">david M.</span> - Muy confiable la tienda. Me asesoraron perfectamente 100% recomendado!
+    </div>
+    <button class="buy-btn" onclick="addToCart('4life Rio vida', 712.00, '4life-rio-vida')">
+        Añadir al carrito
+    </button>
+</div>
+</div>
+    </div>
+</div>
+
+<!--------------------------------------------------------------------------------------->
+<div class="product-card" data-category="postres">
+    <div class="product-summary">
+        <!-- Contenedor de imagen (cerrado correctamente) -->
+        <div class="product-image-container">
+            <img src="img/minicarlota.jpeg" alt="mini carlota" class="product-img">
+        </div>
+
+        <!-- Información al lado de la imagen -->
+        <div class="product-basic-info">
+            <h3>mini carlota</h3>
+            <p class="price">$15.00 MXN</p>
+        </div>
+        
+        <!-- Icono de expansión -->
+        <span class="expand-icon">▼</span>
+    </div>
+
+    <!-- Detalles del acordeón -->
+    <div class="product-details">
+        <div class="details-content">
+            <div class="rating">
+                <span class="stars">★★★★★</span>
+                <span class="reviews">(89 opiniones)</span>
+            </div>
+            <p class="description">Deliciosa carlota cremosa en vasitos.</p>
+            <div class="comments-section">
+                <h4>Comentarios de compradores</h4>
+                <div class="comment">
+                    <span class="user">Luis G.</span> - Muy suave y nada empalagoso.
+                </div>
+            </div>
+            <button class="buy-btn" onclick="addToCart('mini carlota', 15.00, 'mini-carlota')">
+                Añadir al carrito
+            </button>
+        </div>
+    </div>
+</div>
+
+<!--Plantilla de acordeon oficial  ------------------------------------------------------------------------------------------>
+
+<div class="product-card" data-category="postres">
+    <div class="product-summary">
+        <!-- Contenedor de la imagen corregido -->
+        <div class="product-image-container">
+            <img src="img/gelatinasmosaico.jpeg" alt="Gelatina de mosaico" class="product-img">
+        </div>
+
+        <div class="product-basic-info">
+            <h3>Gelatina de mosaico</h3>
+            <p class="price">$35.00 MXN</p>
+        </div>
+        <span class="expand-icon">▼</span>
+    </div>
+
+    <div class="product-details">
+        <div class="details-content">
+            <div class="rating">
+                <span class="stars">★★★★★</span>
+                <span class="reviews">(89 opiniones)</span>
+            </div>
+            <p class="description">Deliciosa gelatina de mosaico esponjoso.</p>
+            <div class="comments-section">
+                <h4>Comentarios de compradores</h4>
+                <div class="comment">
+                    <span class="user">Luis G.</span> - Muy suave y nada empalagoso.
+                </div>
+            </div>
+            <button class="buy-btn" onclick="addToCart('Gelatina de mosaico', 35.00, 'gelatina-de-mosaico')">
+                Añadir al carrito
+            </button>
+        </div>
+    </div>
+</div>
+<!-------------------------------------------------------------------------------------------------->
+
+<div class="product-card" data-category="postres">
+    <div class="product-summary">
+        <!-- Estructura corregida para la imagen -->
+        <div class="product-image-container">
+            <img src="img/minimangoladas.jpeg" alt="Mini mangoladas" class="product-img">
+        </div>
+        
+        <div class="product-basic-info">
+            <h3>Mini mangoladas</h3>
+            <p class="price">$15.00 MXN</p>
+        </div>
+        <span class="expand-icon">▼</span>
+    </div>
+    
+    <div class="product-details">
+        <div class="details-content">
+            <div class="rating">
+                <span class="stars">★★★★★</span>
+                <span class="reviews">(102 opiniones)</span>
+            </div>
+            <p class="description">Deliciosa mangolada con cubierta de chamoy y chile espolvoreado.</p>
+            <div class="comments-section">
+                <h4>Comentarios de compradores</h4>
+                <div class="comment">
+                    <span class="user">Luis G.</span> - Muy suave y nada empalagoso.
+                </div>
+            </div>
+            <button class="buy-btn" onclick="addToCart('Mini mangoladas', 15.00, 'mini-mangoladas')">
+                Añadir al carrito
+            </button>
+        </div>
+    </div>
+</div>
+        <!----------------------------------------------------------------------------------------------------------->
+
+<div class="product-card" data-category="accesorios">
+    <div class="product-summary">
+        <div class="product-image-container">
+            <img src="img/cargador-iphone.jpeg" alt="Cargador iPhone" class="product-img">
+        </div>
+        <div class="product-basic-info">
+            <h3>Cargador iPhone</h3>
+            <p class="price">$200.00 MXN</p>
+        </div>
+        <span class="expand-icon">▼</span>
+    </div>
+    <div class="product-details">
+        <div class="details-content">
+            <div class="rating">
+                <span class="stars">★★★★☆</span>
+                <span class="reviews">(52 opiniones)</span>
+            </div>
+            <p class="description">Cargador para iPhone con tecnología de carga rápida y diseño compacto.</p>
+            <div class="comments-section">
+                <h4>Comentarios de compradores</h4>
+                <div class="comment">
+                    <span class="user">María P.</span> - El cargador tiene muy buena respuesta, carga rápida, fácil de usar.
+                </div>
+            </div>
+            <button class="buy-btn" onclick="addToCart('Cargador iPhone', 200.00, 'cargador-iphone')">Añadir al carrito</button>
+        </div>
+    </div>
+</div>
+</div>
+<script src="script.js"></script>
+<!-- (no modificado para no romperlo) ---------------------------------------------------------------------------------------------->
+
+<!-- NOSOTROS -->
+<section id="nosotros" class="nosotros">
+<h2>¿Quiénes somos?</h2>
+<p>En Polarcsx store reunimos productos y soluciones hasta la puerta de tu casa con una tienda online disponible 24/7.</p>
+</section>
+
+<!-- BENEFICIOS -->
+<section class="beneficios">
+<div><i class="fa-solid fa-shield"></i><span>Compra Segura</span></div>
+<div><i class="fa-solid fa-headset"></i><span>Atención</span></div>
+<div><i class="fa-solid fa-check"></i><span>Soporte</span></div>
+</section>
+
+<!-- REDES -->
+<section class="sociales">
+<div class="redes">
+    <a href="https://wa.me/529361577100"><i class="fab fa-whatsapp"></i></a>
+    <a href="https://www.facebook.com/share/14mPAyFx4Pb/"><i class="fab fa-facebook-f"></i></a>
+    <a href="https://www.instagram.com/polarcs_x"><i class="fab fa-instagram"></i></a>
+    <a href="https://www.tiktok.com/@polarcs_x"><i class="fab fa-tiktok"></i></a>
+</div>
+</section>
+
+<!-- ===========AREA LEGAL POLARCSX -------------------------------------------------------------->
+    
+    <section class="legal"><div class="legal-links">
+
+    <a class="link-privacidad" href="aviso-privacidad.html" target="_blank" rel="noopener noreferrer" title="Abrir Aviso de Privacidad en una pestaña nueva">
+        Aviso de Privacidad
+    </a>
+
+    <span class="dot">•</span>
+
+    <a class="link-terminos" href="terminos-condiciones.html" target="_blank" rel="noopener noreferrer" title="Abrir Términos y Condiciones en una pestaña nueva">
+        Términos y Condiciones
+    </a>
+
+    <span class="dot">•</span>
+
+    <a class="link-cookies" href="politica-cookies.html" target="_blank" rel="noopener noreferrer" title="Abrir Política de Cookies en una pestaña nueva">
+        Política de Cookies
+    </a>
+
+</div>
+
+</section>
+
+<!-- FOOTER -->
+
+<footer class="main-footer">
+  <p class="brand">Polarcsx Store</p>
+  <p class="slogan">Todo en un solo mundo todo en un solo lugar</p>
+  <p class="copyright">© 2026 Polarcsx</p>
+</footer>
+
+<div id="product-modal" class="modal">
+    <div class="modal-content">
+        <span class="close-btn" onclick="closeProductViewer()">&times;</span>
+        <div id="modal-body"></div>
+    </div>
+</div>
+
+<!-- Floating Action Button - Carrito -->
+<button class="fab-cart" id="fab-cart-btn" onclick="toggleCart()" title="Abrir carrito">
+    <i class="fa-solid fa-shopping-cart"></i>
+    <span class="fab-cart-count" id="fab-cart-count">0</span>
+</button>
+
+</body>
+</html>

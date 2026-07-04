@@ -1,0 +1,286 @@
+/* LOGO Y HEADER */
+.logo-section {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.logo-image img {
+    height: 40px;
+    width: auto;
+    object-fit: contain;
+}
+
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+/* Primero, eliminamos los estilos de botón de categoría genérico para el carrito */
+#cart-toggle-btn.category-btn {
+    background: transparent;
+    border: 1px solid #444;
+    color: #fff;
+    padding: 8px 15px;
+}
+
+/* Y aquí definimos qué pasa al pasar el mouse */
+#cart-toggle-btn.category-btn:hover {
+    background: #222;
+    border-color: #666;
+}
+
+#cart-toggle-btn {
+    background: #222 !important;
+    border: 1px solid #444 !important;
+    color: #fff;
+}
+
+
+#cart-toggle-btn.active {
+    background-color: #ff4757;
+    color: #fff;
+}
+
+.cart-count {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background: #bb86fc;
+    color: #0a0a0a;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+/* CARRITO FLOTANTE */
+.cart-overlay {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.6);
+    display: none;
+    z-index: 199;
+}
+
+.cart-overlay.active {
+    display: block;
+}
+
+.cart-sidebar {
+    position: fixed;
+    right: -400px;
+    top: 0;
+    width: 380px;
+    height: 100vh;
+    background: #141414;
+    border-left: 1px solid #333;
+    box-shadow: -5px 0 20px rgba(0,0,0,.5);
+    transition: right 0.35s ease;
+    z-index: 200;
+    display: flex;
+    flex-direction: column;
+}
+
+.cart-sidebar.active {
+    right: 0;
+}
+
+.cart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    border-bottom: 1px solid #222;
+}
+
+.cart-header h3 {
+    margin: 0;
+    font-size: 1.2rem;
+}
+
+.cart-close {
+    background: none;
+    border: none;
+    color: #e0e0e0;
+    font-size: 20px;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.cart-close:hover {
+    color: #bb86fc;
+}
+
+/* Estilo para el botón de carrito dentro de la lista */
+#cart-toggle-btn {
+    background-color: #222;
+    color: #ff4757; /* Color distintivo para resaltar el carrito */
+    border: 1px solid #333;
+}
+
+#cart-toggle-btn.active {
+    background-color: #ff4757;
+    color: #fff;
+}
+
+/* Contenedor principal del carrito */
+.cart-container {
+    background-color: #151515;
+    border: 1px solid #222;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 20px auto;
+    max-width: 800px;
+    color: #fff;
+}
+
+/* Filas de productos dentro del carrito */
+.cart-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid #222;
+}
+
+.cart-item-info h4 {
+    margin: 0;
+    font-size: 1rem;
+}
+
+.cart-item-info p {
+    margin: 2px 0 0 0;
+    color: #aaa;
+    font-size: 0.85rem;
+}
+
+/* Botón para eliminar un artículo del carrito */
+.remove-btn {
+    background: none;
+    border: none;
+    color: #ff4757;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+/* Resumen y botón de pago */
+.cart-summary {
+    margin-top: 20px;
+    text-align: right;
+}
+
+.cart-summary p {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.checkout-btn {
+    background-color: #25d366; /* Verde WhatsApp */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.checkout-btn:hover {
+    background-color: #128c7e;
+}
+
+.empty-cart {
+    text-align: center;
+    color: #888;
+    padding: 40px 20px;
+}
+
+.cart-item-name {
+    margin: 0 0 5px 0;
+    color: #fff;
+    font-size: 0.95rem;
+    font-weight: 600;
+}
+
+.cart-item-price {
+    margin: 0;
+    color: #bb86fc;
+    font-size: 0.9rem;
+}
+
+.cart-item-remove {
+    background: none;
+    border: none;
+    color: #ff4444;
+    cursor: pointer;
+    font-size: 18px;
+    transition: color 0.3s ease;
+}
+
+.cart-item-remove:hover {
+    color: #ff0000;
+}
+
+.cart-footer {
+    border-top: 1px solid #222;
+    padding: 20px;
+    background: #0a0a0a;
+}
+
+.cart-total {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+
+.cart-whatsapp-btn {
+    width: 100%;
+    padding: 14px;
+    background: linear-gradient(90deg, #25D366, #00ff88);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.cart-whatsapp-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 20px rgba(37,211,102,.4);
+}
+
+@media (max-width: 600px) {
+   .cart-sidebar {
+    position: fixed;
+    top: 0;
+    right: -100%; /* Escondido */
+    width: 350px;
+    height: 100vh;
+    background-color: #1a1a1a;
+    z-index: 1000;
+    transition: right 0.3s ease;
+    padding: 20px;
+}
+
+.cart-sidebar.active {
+    right: 0; /* Aparece */
+
+}
+}
