@@ -198,7 +198,6 @@ function renderProductViewer(productData) {
     <button class="qty-btn" onclick="changeViewerQty(-1)">−</button>
     <span id="viewer-qty-value" class="qty-value">1</span>
     <button class="qty-btn" onclick="changeViewerQty(1)">+</button>
-    <button class="viewer-cart-btn" onclick="closeProductViewer(); openCartModal();">Ver carrito</button>
 </div>
                 
                 <p class="viewer-hint">Toca cualquier parte fuera del producto para continuar.</p>
@@ -477,6 +476,42 @@ function buyNowWhatsApp(title, price, quantity = 1) {
     message += `• ${title} (x${quantity}) - $${subtotal} MXN\n\n`;
     message += '¿Podrían confirmarme disponibilidad y el total con envío?';
     window.open(`https://wa.me/529361577100?text=${encodeURIComponent(message)}`, '_blank');
+}
+
+function sendWhatsAppOrder() {
+
+    if (cart.length === 0) {
+        alert("Tu carrito está vacío.");
+        return;
+    }
+
+    let total = 0;
+
+    let message = "🛒 *NUEVO PEDIDO POLARCSX*";
+    message += "\n\n";
+
+    cart.forEach((item, index) => {
+
+        const subtotal = item.price * item.quantity;
+        total += subtotal;
+
+        message += `${index + 1}. ${item.name}\n`;
+        message += `Cantidad: ${item.quantity}\n`;
+        message += `Precio: $${item.price.toFixed(2)} MXN\n`;
+        message += `Subtotal: $${subtotal.toFixed(2)} MXN\n\n`;
+
+    });
+
+    message += "-----------------------------\n";
+    message += `TOTAL: $${total.toFixed(2)} MXN\n\n`;
+    message += "Hola, me interesa realizar este pedido.\n";
+    message += "¿Podrían confirmar disponibilidad y costo de envío?";
+
+    window.open(
+        `https://wa.me/529361577100?text=${encodeURIComponent(message)}`,
+        "_blank"
+    );
+
 }
 
 function changeViewerQty(delta) {
