@@ -8,11 +8,6 @@
 // 6. Inicialización: qué se ejecuta al cargar la página
 // ================================================================
 
-function toggleAccordion(element) {
-    // Función obsoleta - mantener vacía para compatibilidad
-    console.warn('[DEPRECATED] toggleAccordion() is no longer used. Use product viewer instead.');
-}
-
 // ========================================
 // PRODUCT VIEWER STATE
 // ========================================
