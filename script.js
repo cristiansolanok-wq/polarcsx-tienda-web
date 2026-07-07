@@ -198,6 +198,7 @@ function renderProductViewer(productData) {
     <button class="qty-btn" onclick="changeViewerQty(-1)">−</button>
     <span id="viewer-qty-value" class="qty-value">1</span>
     <button class="qty-btn" onclick="changeViewerQty(1)">+</button>
+    <button class="viewer-cart-btn" onclick="closeProductViewer(); openCartModal();">Ver carrito</button>
 </div>
                 
                 <p class="viewer-hint">Toca cualquier parte fuera del producto para continuar.</p>
@@ -399,7 +400,12 @@ function updateCartUI() {
         itemRow.className = 'cart-item';
         itemRow.innerHTML = `
             <div class="cart-item-info">
-                <p class="cart-item-name">${item.name} (x${item.quantity})</p>
+                <p class="cart-item-name">${item.name}</p>
+                <div class="cart-item-qty-controls">
+                    <button class="qty-btn" onclick="decrementCartItem('${item.id}')">−</button>
+                    <span class="qty-value">${item.quantity}</span>
+                    <button class="qty-btn" onclick="incrementCartItem('${item.id}')">+</button>
+                </div>
                 <p class="cart-item-price">$${(item.price * item.quantity).toFixed(2)} MXN</p>
             </div>
             <button class="cart-item-remove" onclick="removeFromCart('${item.id}')">✕</button>
@@ -414,6 +420,25 @@ function updateCartUI() {
 }
 function removeFromCart(id) {
     cart = cart.filter(item => item.id !== id);
+    saveCart();
+    updateCartUI();
+}
+
+function incrementCartItem(id) {
+    const item = cart.find(i => i.id === id);
+    if (!item) return;
+    item.quantity += 1;
+    saveCart();
+    updateCartUI();
+}
+
+function decrementCartItem(id) {
+    const item = cart.find(i => i.id === id);
+    if (!item) return;
+    item.quantity -= 1;
+    if (item.quantity <= 0) {
+        cart = cart.filter(i => i.id !== id);
+    }
     saveCart();
     updateCartUI();
 }
