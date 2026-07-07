@@ -12,6 +12,10 @@
 
 <body>
 
+<!-- ============================================
+     ENCABEZADO (HEADER)
+     Logo + banda de bienvenida, fija arriba
+     ============================================ -->
 <header class="top-band">
     <div class="band-content">
         <div class="logo-box">
@@ -26,6 +30,9 @@
         </div>
     </div>
 </header>
+<!-- ============================================
+     CATÁLOGO Y BARRA DE CATEGORÍAS
+     ============================================ -->
 <div class="catalog-section">
     <h2 class="catalog-title">| Catálogo de Productos</h2>
     
@@ -46,6 +53,9 @@
         </button>
     </div>
 </div>
+<!-- ============================================
+     CARRITO DE COMPRAS (ventana emergente)
+     ============================================ -->
 <div id="cart-modal" class="cart-modal">
     <div class="cart-modal-overlay" onclick="closeCartModal()"></div>
     <div class="cart-modal-content">
@@ -63,8 +73,11 @@
     </div>
 </div>
 
-<!----------------------------------------------------------------- Plantilla de acordeon oficial -->
-
+<!-- ============================================
+     ACORDEÓN DE PRODUCTOS (tarjetas del catálogo)
+     Cada producto es una "product-card"; al tocarla
+     se abre el MODAL definido más abajo.
+     ============================================ -->
 <div class="products-grid">
 
 <div class="product-card" data-category="4life" data-product-id="4life-belle-vie">
@@ -120,7 +133,7 @@
         </div>
         <div class="product-basic-info">
             <h3>4life Transfer factor plus</h3>
-            <p class="product-subtitle">"polarcsx-store" Sistema inmunologico</p>
+            <p class="product-subtitle">"polarcsx-store" Sistema inmunológico</p>
             <p class="price">$1,339.00 MXN*</p>
         </div>
         <span class="expand-icon">▼</span>
@@ -172,7 +185,7 @@
         </div>
         <div class="product-basic-info">
             <h3>4life Gold factor</h3>
-            <p class="product-subtitle">"polarcsx-store" Sistema inmunologico</p>
+            <p class="product-subtitle">"polarcsx-store" Sistema inmunológico</p>
             <p class="price">$1,359.00 MXN*</p>
         </div>
         <span class="expand-icon">▼</span>
@@ -225,7 +238,7 @@
         </div>
         <div class="product-basic-info">
             <h3>4life Rio vida</h3>
-            <p class="product-subtitle">"polarcsx-store" Sistema inmunologico</p>
+            <p class="product-subtitle">"polarcsx-store" Sistema inmunológico</p>
             <p class="price">$712.00 MXN*</p>
         </div>
         <span class="expand-icon">▼</span>
@@ -408,8 +421,35 @@
     </div>
 </div>
 </div>
+
+<!-- ============================================
+     CARRITO FLOTANTE (FAB)
+     Botón fijo, esquina inferior izquierda,
+     siempre visible para revisar el carrito.
+     ============================================ -->
+<button id="fab-cart-btn" class="fab-cart-btn" onclick="toggleCart()" title="Ver mi carrito">
+    <i class="fa-solid fa-shopping-cart"></i>
+    <span id="fab-cart-count" class="fab-cart-count">0</span>
+</button>
+
+<!-- ============================================
+     MODAL / VISOR DE PRODUCTO
+     (se abre al tocar una tarjeta de producto)
+     ============================================ -->
+<div id="product-modal" class="modal">
+    <div class="modal-content">
+        <button class="close-btn">×</button>
+        <div id="modal-body"></div>
+    </div>
+</div>
+
 <script src="script.js"></script>
 <!-- (no modificado para no romperlo) ---------------------------------------------------------------------------------------------->
+
+<!-- ============================================
+     PIE DE PÁGINA (FOOTER) — empieza aquí
+     Incluye: Nosotros, Beneficios, Redes sociales
+     ============================================ -->
 
 <!-- NOSOTROS -->
 <section id="nosotros" class="nosotros">
@@ -434,50 +474,37 @@
 </div>
 </section>
 
-<!-- ===========AREA LEGAL POLARCSX -------------------------------------------------------------->
-    
-    <section class="legal"><div class="legal-links">
+<!-- ============================================
+     FOOTER FINAL — marca, slogan, copyright,
+     enlaces legales (Privacidad, Términos, Cookies)
+     ============================================ -->
+<footer class="main-footer">
+    <h3 class="brand">Polarcsx Store</h3>
+    <p class="slogan">Tu tienda de confianza, directo a tu puerta.</p>
+    <p class="copyright">© 2026 Polarcsx Store. Todos los derechos reservados.</p>
+<div class="legal-links">
 
-    <a class="link-privacidad" href="aviso-privacidad.html" target="_blank" rel="noopener noreferrer" title="Abrir Aviso de Privacidad en una pestaña nueva">
-        Aviso de Privacidad
-    </a>
+<a href="aviso-privacidad.html" class="link-privacidad">
+Aviso de Privacidad
+</a>
 
-    <span class="dot">•</span>
+<span class="dot">•</span>
 
-    <a class="link-terminos" href="terminos-condiciones.html" target="_blank" rel="noopener noreferrer" title="Abrir Términos y Condiciones en una pestaña nueva">
-        Términos y Condiciones
-    </a>
+<a href="terminos-condiciones.html" class="link-terminos">
+Términos y Condiciones
+</a>
 
-    <span class="dot">•</span>
+<span class="dot">•</span>
 
-    <a class="link-cookies" href="politica-cookies.html" target="_blank" rel="noopener noreferrer" title="Abrir Política de Cookies en una pestaña nueva">
-        Política de Cookies
-    </a>
+<a href="politica-cookies.html" class="link-cookies">
+Política de Cookies
+</a>
 
 </div>
-
-</section>
-
-<!-- FOOTER -->
-
-<footer class="main-footer">
-  <p class="brand">Polarcsx Store</p>
-  <p class="slogan">Todo en un solo mundo todo en un solo lugar</p>
-  <p class="copyright">© 2026 Polarcsx</p>
+    </div>
 </footer>
 
-<div id="product-modal" class="modal">
-    <div class="modal-content">
-        <span class="close-btn" onclick="closeProductViewer()">&times;</span>
-        <div id="modal-body"></div>
-    </div>
-</div>
 
-<!-- Floating Action Button - Carrito -->
-<button class="fab-cart" id="fab-cart-btn" onclick="toggleCart()" title="Abrir carrito">
-    <i class="fa-solid fa-shopping-cart"></i>
-    <span class="fab-cart-count" id="fab-cart-count">0</span>
-</button>
 
 </body>
 </html>

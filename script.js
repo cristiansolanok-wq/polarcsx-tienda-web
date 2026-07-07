@@ -1,3 +1,13 @@
+// ================================================================
+// ÍNDICE DE ESTE ARCHIVO (para no perderte buscando funciones):
+// 1. Visor de producto (modal): abrir, cerrar, extraer datos, render
+// 2. Filtro de categorías (acordeón/catálogo)
+// 3. Carrito de compras: agregar, quitar, actualizar, guardar
+// 4. WhatsApp: armar y enviar el pedido
+// 5. Encabezado: scroll suave del logo
+// 6. Inicialización: qué se ejecuta al cargar la página
+// ================================================================
+
 function toggleAccordion(element) {
     // Función obsoleta - mantener vacía para compatibilidad
     console.warn('[DEPRECATED] toggleAccordion() is no longer used. Use product viewer instead.');
@@ -181,14 +191,19 @@ function renderProductViewer(productData) {
                 
                 ${commentsHtml}
                 
-                <div class="viewer-actions">
-                    <button class="viewer-buy-btn" onclick="addToCart('${productData.title.replace(/'/g, "\\'")}', ${productData.price}, '${productData.id}'); closeProductViewer();">
-                        Comprar ahora
-                    </button>
-                    <button class="viewer-cart-btn" onclick="addToCart('${productData.title.replace(/'/g, "\\'")}', ${productData.price}, '${productData.id}'); closeProductViewer();">
-                        Añadir al carrito
-                    </button>
-                </div>
+<div class="viewer-actions">
+    <button class="viewer-buy-btn" onclick="buyNowWhatsApp('${productData.title.replace(/'/g, "\\'")}', ${productData.price}, viewerState.currentQty)">
+        Comprar ahora
+    </button>
+    <button class="viewer-cart-btn" onclick="addToCart('${productData.title.replace(/'/g, "\\'")}', ${productData.price}, '${productData.id}', viewerState.currentQty); this.textContent='✓ Añadido';setTimeout(()=>{this.textContent='Añadir al carrito';},1500);">
+        Añadir al carrito
+    </button>
+</div>
+<div class="viewer-qty-controls">
+    <button class="qty-btn" onclick="changeViewerQty(-1)">−</button>
+    <span id="viewer-qty-value" class="qty-value">1</span>
+    <button class="qty-btn" onclick="changeViewerQty(1)">+</button>
+</div>
                 
                 <p class="viewer-hint">Toca cualquier parte fuera del producto para continuar.</p>
             </div>
@@ -326,6 +341,9 @@ if (document.readyState === 'loading') {
     initializeLogoScroll();
 }
 
+// ========================================
+// CARRITO DE COMPRAS
+// ========================================
 let cart = [];
 try {
     cart = JSON.parse(localStorage.getItem('polarcsx_cart')) || [];
@@ -336,22 +354,18 @@ try {
 function saveCart() {
     localStorage.setItem('polarcsx_cart', JSON.stringify(cart));
 }
-
-function addToCart(name, price, id) {
+function addToCart(name, price, id, quantity = 1) {
     const existingItem = cart.find(item => item.id === id);
     if (existingItem) {
-        existingItem.quantity += 1;
+        existingItem.quantity += quantity;
     } else {
-        cart.push({ id: id, name: name, price: parseFloat(price), quantity: 1 });
+        cart.push({ id: id, name: name, price: parseFloat(price), quantity: quantity });
     }
     saveCart();
     updateCartUI();
-    
-    // Animar el FAB con pulso
     const fabBtn = document.getElementById('fab-cart-btn');
     if (fabBtn) {
         fabBtn.classList.remove('pulse-animation');
-        // Trigger reflow para reiniciar la animación
         void fabBtn.offsetWidth;
         fabBtn.classList.add('pulse-animation');
     }
@@ -434,20 +448,24 @@ function closeCartModal() {
     cartModal.classList.remove('open');
 }
 
-function sendWhatsAppOrder() {
-    if (cart.length === 0) {
-        alert('Tu carrito está vacío.');
-        return;
-    }
-    let message = '¡Hola Polarcsx Store! Me interesa realizar el siguiente pedido:\n\n';
-    cart.forEach(item => {
-        message += `• ${item.name} (x${item.quantity}) - $${(item.price * item.quantity).toFixed(2)} MXN\n`;
-    });
-    const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-    message += `\n*Total estimado:* $${totalPrice.toFixed(2)} MXN\n`;
-    
-    const whatsappUrl = `https://wa.me/529361577100?text=${encodeURIComponent(message)}`;
-    window.open(whatsappUrl, '_blank');
+// ========================================
+// ENVÍO DE PEDIDO POR WHATSAPP
+// ========================================
+function buyNowWhatsApp(title, price, quantity = 1) {
+    const subtotal = (parseFloat(price) * quantity).toFixed(2);
+    let message = '¡Hola Polarcsx Store! Quiero comprar directamente este producto:\n\n';
+    message += `• ${title} (x${quantity}) - $${subtotal} MXN\n\n`;
+    message += '¿Podrían confirmarme disponibilidad y el total con envío?';
+    window.open(`https://wa.me/529361577100?text=${encodeURIComponent(message)}`, '_blank');
+}
+
+function changeViewerQty(delta) {
+    const valueEl = document.getElementById('viewer-qty-value');
+    if (!valueEl) return;
+    let qty = parseInt(valueEl.textContent, 10) || 1;
+    qty = Math.max(1, qty + delta);
+    valueEl.textContent = qty;
+    viewerState.currentQty = qty;
 }
 
 // ========================================

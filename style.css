@@ -1,3 +1,15 @@
+/* ================================================================
+   ÍNDICE DE SECCIONES DE ESTE ARCHIVO (para no perderte buscando):
+   1. Reseteo básico y variables generales
+   2. ENCABEZADO (HEADER) — banda superior con logo
+   3. CATÁLOGO Y ACORDEÓN — tarjetas de producto
+   4. CARRITO (ventana emergente inferior)
+   5. MODAL / VISOR DE PRODUCTO (animación al abrir producto)
+   6. NAV, BOTÓN WHATSAPP, CONTACTO
+   7. FOOTER — Nosotros, Beneficios, Redes, Enlaces legales/Cookies
+   8. CUADRÍCULA DE PRODUCTOS (grid) y RESPONSIVE (media queries)
+   ================================================================ */
+
 /* Variables y reseteo básico */
 * {
     margin: 0;
@@ -25,6 +37,9 @@ body {
     font-size: 1.2rem;
 }
 
+/* ========================================
+   ENCABEZADO (HEADER)
+   ======================================== */
 /* La banda delgada */
 .top-band {
     background-color: #0f0f0f; /* Color oscuro tipo banda */
@@ -950,12 +965,6 @@ CARRITO MODAL - OVERLAY STYLE
     text-shadow: 0 0 20px rgba(37, 211, 102, 0.3);
 }
 
-.viewer-price::before {
-    content: "$";
-    font-size: 0.8em;
-    opacity: 0.8;
-}
-
 .viewer-rating {
     display: flex;
     align-items: center;
@@ -1099,6 +1108,14 @@ CARRITO MODAL - OVERLAY STYLE
     transition: all 0.2s ease;
     letter-spacing: 0.5px;
     text-transform: uppercase;
+}
+
+.viewer-qty-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    margin-top: 12px;
 }
 
 .viewer-buy-btn {
@@ -1371,6 +1388,9 @@ gap:10px;
 flex-wrap:wrap;
 }
 
+/* ========================================
+   ENLACES LEGALES (Privacidad, Términos, Cookies)
+   ======================================== */
 .legal-links a{
 text-decoration:none;
 font-size:.90rem;
@@ -1616,11 +1636,6 @@ filter:brightness(1.15);
     text-transform: uppercase;
 }
 
-.category-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-}
 
 /* Diseño especial para que el botón de carrito resalte del resto */
 .cart-btn-special {
@@ -1660,4 +1675,127 @@ filter:brightness(1.15);
         justify-content: center;
         margin-top: 5px;
     }
+
+}
+
+/* ========================================
+   CARRITO FLOTANTE (FAB) — botón fijo
+   esquina inferior izquierda
+   ======================================== */
+.fab-cart-btn {
+    position: fixed;
+    bottom: 24px;
+    left: 24px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #C0A86F 0%, #9D8B5C 100%);
+    border: none;
+    color: #000;
+    font-size: 1.4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+    z-index: 500;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.fab-cart-btn:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 12px 32px rgba(192, 168, 111, 0.5);
+}
+
+.fab-cart-count {
+    position: absolute;
+    top: -4px;
+    right: -4px;
+    background: #ff4d4d;
+    color: #fff;
+    font-size: 0.75rem;
+    font-weight: bold;
+    min-width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 4px;
+    border: 2px solid #0a0a0a;
+}
+
+/* Animación de pulso al agregar un producto */
+@keyframes pulseCart {
+    0%   { transform: scale(1); }
+    30%  { transform: scale(1.25); }
+    60%  { transform: scale(0.95); }
+    100% { transform: scale(1); }
+}
+
+.pulse-animation {
+    animation: pulseCart 0.4s ease;
+}
+
+@media (max-width: 768px) {
+    .fab-cart-btn {
+        bottom: 18px;
+        left: 18px;
+        width: 54px;
+        height: 54px;
+    }
+}
+
+/* ========================================
+   CONTROLES DE CANTIDAD DENTRO DEL CARRITO
+   (botones + / − por artículo)
+   ======================================== */
+.cart-item-qty-controls {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 6px;
+}
+
+.qty-btn {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    border: 1px solid #444;
+    background: #1f1f1f;
+    color: #fff;
+    font-size: 1.1rem;
+    line-height: 1;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s ease;
+}
+
+.qty-btn:hover {
+    background: #333;
+    border-color: #c5a059;
+}
+
+.qty-value {
+    min-width: 20px;
+    text-align: center;
+    font-weight: 600;
+    color: #fff;
+}
+
+.fab-cart-btn {
+    z-index: 3000;
+}
+#cart-modal.open {
+    z-index: 3100;
+}
+
+.viewer-qty-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    margin-top: 12px;
 }
