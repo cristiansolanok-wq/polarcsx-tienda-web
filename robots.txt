@@ -1,0 +1,5 @@
+User-agent:*
+Allow:/
+
+sitemap:
+https://cristiansolanok-wq.github.io/polarcsx-tienda-web/sitemap.xml
