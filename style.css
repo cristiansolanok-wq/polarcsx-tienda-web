@@ -1786,3 +1786,48 @@ filter:brightness(1.15);
         justify-content: center;
     }
 }
+
+/* ========================================
+   TARJETAS — badge de precio sobre la imagen
+   (identidad de marca: precio visible de inmediato)
+   ======================================== */
+.product-image-container {
+    position: relative;
+}
+
+.price-badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: rgba(10, 10, 10, 0.85);
+    border: 1px solid #cfa54a;
+    color: #cfa54a;
+    font-weight: bold;
+    font-size: 0.85rem;
+    padding: 5px 12px;
+    border-radius: 999px;
+    backdrop-filter: blur(4px);
+    z-index: 2;
+    pointer-events: none;
+}
+
+@media (max-width: 768px) {
+    .price-badge {
+        font-size: 0.75rem;
+        padding: 4px 10px;
+        top: 8px;
+        right: 8px;
+    }
+}
+
+/* ------------------------------------------------------
+OPCIONAL — marco uniforme para fotos de estilos distintos
+Descomenta este bloque si quieres probarlo (ver mensaje)
+------------------------------------------------------*/
+.product-image-container {
+    background: radial-gradient(circle at 50% 35%, #161616 0%, #0a0a0a 70%);
+}
+.product-image-container img.product-img {
+    object-fit: contain;
+    padding: 14px;
+}

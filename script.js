@@ -329,6 +329,7 @@ if (document.readyState === 'loading') {
         initializeProductViewer();
         initializeLogoScroll();
         initCookieBanner();
+        addPriceBadges();
     });
 } else {
     filterCategory('all');
@@ -336,6 +337,7 @@ if (document.readyState === 'loading') {
     initializeProductViewer();
     initializeLogoScroll();
     initCookieBanner();
+    addPriceBadges();
 }
 
 // ========================================
@@ -542,6 +544,23 @@ function handleCookieChoice(choice) {
     localStorage.setItem('polarcsx_cookie_consent', choice);
     const banner = document.getElementById('cookie-banner');
     if (banner) banner.classList.remove('show');
+}
+
+// ========================================
+// TARJETAS: precio como badge sobre la imagen
+// (no toca el HTML de cada producto, se inyecta
+// en tiempo de carga)
+// ========================================
+function addPriceBadges() {
+    document.querySelectorAll('.product-image-container').forEach(container => {
+        if (container.querySelector('.price-badge')) return; // evita duplicados
+        const priceEl = container.parentElement.querySelector('.price');
+        if (!priceEl) return;
+        const badge = document.createElement('span');
+        badge.className = 'price-badge';
+        badge.textContent = priceEl.textContent.trim();
+        container.appendChild(badge);
+    });
 }
 
 // ========================================
