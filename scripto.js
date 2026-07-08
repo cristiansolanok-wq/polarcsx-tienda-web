@@ -328,14 +328,12 @@ if (document.readyState === 'loading') {
         updateCartUI();
         initializeProductViewer();
         initializeLogoScroll();
-        initCookieBanner();
     });
 } else {
     filterCategory('all');
     updateCartUI();
     initializeProductViewer();
     initializeLogoScroll();
-    initCookieBanner();
 }
 
 // ========================================
@@ -523,25 +521,6 @@ function changeViewerQty(delta) {
     qty = Math.max(1, qty + delta);
     valueEl.textContent = qty;
     viewerState.currentQty = qty;
-}
-
-// ========================================
-// COOKIES — banner de consentimiento
-// ========================================
-function initCookieBanner() {
-    const banner = document.getElementById('cookie-banner');
-    if (!banner) return;
-
-    const choice = localStorage.getItem('polarcsx_cookie_consent');
-    if (!choice) {
-        setTimeout(() => banner.classList.add('show'), 600);
-    }
-}
-
-function handleCookieChoice(choice) {
-    localStorage.setItem('polarcsx_cookie_consent', choice);
-    const banner = document.getElementById('cookie-banner');
-    if (banner) banner.classList.remove('show');
 }
 
 // ========================================
