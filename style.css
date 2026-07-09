@@ -26,17 +26,6 @@ body {
 
 
 
-.welcome-text h1 {
-    color: white;
-    font-size: 2.5rem;
-    margin-bottom: 10px;
-}
-
-.welcome-text p {
-    color: #ccc;
-    font-size: 1.2rem;
-}
-
 /* ========================================
    ENCABEZADO (HEADER)
    ======================================== */
@@ -128,25 +117,6 @@ body {
     margin: 2px 0 6px 0;
 }
 
-.cart-container {
-    max-width: 1200px;
-    margin: 20px auto;
-    padding: 20px;
-    border: 1px solid #333;
-    border-radius: 16px;
-    background: rgba(255,255,255,0.03);
-    box-shadow: 0 12px 30px rgba(0,0,0,0.35);
-}
-
-.cart-summary {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 20px;
-    flex-wrap: wrap;
-    gap: 12px;
-}
-
 .checkout-btn {
     padding: 12px 20px;
     background: linear-gradient(90deg, #25D366, #0db14b);
@@ -218,10 +188,10 @@ body {
 }
 
 .price {
-    font-size: 18px;
-    font-weight: bold;
-    color: #00ff37;
-    margin-top: 5px;
+    /* El precio ya se muestra en el badge sobre la imagen (arriba).
+       Este texto se queda oculto en el DOM porque el JS lo sigue
+       leyendo para armar el visor — quitarlo del HTML rompería eso. */
+    display: none;
 }
 
 .expand-icon {
@@ -298,7 +268,7 @@ body {
 .buy-btn {
     width: 100%;
     padding: 15px;
-    background-color: #bb86fc;
+    background-color: #c5a059;
     color: #000;
     border: none;
     border-radius: 4px;
@@ -311,46 +281,6 @@ body {
 .buy-btn:hover {
     background-color: #9965f4;
 }
-
-/* Rotación del icono al expandir */
-.product-card.active .expand-icon {
-    transform: rotate(180deg);
-}
-
-.search-box {
-    width: min(100%, 480px);
-}
-
-.search-box input {
-    width: 100%;
-    padding: 16px 22px;
-    border-radius: 999px;
-    border: 1px solid rgba(255,255,255,.12);
-    background: rgba(255,255,255,.05);
-    color: #ffffff;
-    font-size: 1rem;
-    outline: none;
-    transition: .3s;
-}
-
-.search-box input:focus {
-    border-color: rgba(37,211,102,.65);
-    box-shadow: 0 0 20px rgba(37,211,102,.12);
-    background: rgba(255,255,255,.08);
-}
-
-@media (max-width: 860px) {
-    .catalogo-header,
-    .accordion-card-header {
-        flex-direction: column;
-        align-items: stretch;
-    }
-
-    .accordion-card-header {
-        padding: 18px;
-    }
-}
-
 
 /* IMAGEN LOGO */
 .logo-img {
@@ -369,8 +299,8 @@ body {
 
 /* Esta es la regla nueva: El brillo SOLO aparece cuando pones el cursor encima */
 .logo-link:hover .logo-img {
-    box-shadow: -3px 0 15px rgba(225, 0, 255, 0.7),
-                 3px 0 15px rgba(225, 0, 255, 0.7)
+    box-shadow: -3px 0 15px rgba(197, 160, 89, 0.6),
+                 3px 0 15px rgba(197, 160, 89, 0.6)
 }
 .logo-link {
     display: inline-flex;
@@ -379,89 +309,6 @@ body {
     color: inherit;
     text-decoration: none;
 }
-
-.logo-link:hover .logo-hint {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-.logo-hint {
-    font-size: 0.85rem;
-    color: rgba(197, 160, 89, 0.85);
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    opacity: 0.7;
-    transition: transform 0.2s ease, opacity 0.2s ease;
-    transform: translateY(2px);
-}
-
-/* NAV */
-nav{
-    display:flex;
-    align-items:center;
-    gap:18px;
-}
-
-/* LINKS */
-nav a{
-    color:white;
-    text-decoration:none;
-    font-weight:500;
-    padding:8px 10px;
-    border-radius:8px;
-    transition:.2s;
-}
-
-nav a:hover{
-    color:#25D366;
-    background:rgba(37,211,102,.08);
-}
-
-/* BOTÓN WHATSAPP */
-header .btn-header{
-    background:#25D366;
-    padding:8px 16px;
-    border-radius:20px;
-    color:white;
-    font-weight:bold;
-    margin-left:10px;
-    transition:.3s;
-}
-
-.btn-header:hover{
-    background:#1ebd57;
-    transform:scale(1.05);
-}
-
-
-
-/* ========================= */
-/* BOTÓN WHATSAPP */
-/* ========================= */
-
-.btn-whatsapp{
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    max-width: 240px;
-    padding: 14px 18px;
-    margin-top: 18px;
-    border-radius: 14px;
-    background: linear-gradient(90deg, #25D366, #00ff88);
-    color: white;
-    font-weight: 700;
-    border: none;
-    cursor: pointer;
-    transition: transform .25s ease, box-shadow .25s ease;
-}
-
-.btn-whatsapp:hover{
-    transform: translateY(-1px);
-    box-shadow: 0 0 20px rgba(37,211,102,.35);
-}
-
-
 
 /* CONTACTO */
 
@@ -490,7 +337,7 @@ font-size:1rem;
 }
 
 .beneficios i{
-color:#c800ff;
+color:#c5a059;
 font-size:1rem;
 }
 
@@ -510,7 +357,7 @@ margin:auto;
 .nosotros h2 {
     font-size: 3rem;
     margin-bottom: 25px;
-    background: linear-gradient(90deg, #b300ff, #ff4fd8);
+    background: linear-gradient(90deg, #c5a059, #f0d78c);
     -webkit-background-clip: text;
     background-clip: text; /* Añade esta línea para corregir el error */
     -webkit-text-fill-color: transparent;
@@ -641,10 +488,10 @@ box-shadow:
 
 /* título */
 .brand{
-    color:#c86bff;
+    color:#c5a059;
     margin-bottom:10px;
     font-weight:600;
-    text-shadow:0 0 10px rgba(200,107,255,.25);
+    text-shadow:0 0 10px rgba(197,160,89,.25);
 }
 
 /* frase */
@@ -963,22 +810,38 @@ CARRITO MODAL - OVERLAY STYLE
     text-shadow: 0 0 20px rgba(37, 211, 102, 0.3);
 }
 
-.viewer-rating {
+/* Sello de confianza — esto es lo que "vende la marca":
+   sin importar el producto, siempre aparece el mismo respaldo. */
+.viewer-trust-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    width: fit-content;
+    padding: 6px 14px 6px 10px;
+    border-radius: 999px;
+    background: rgba(197, 160, 89, 0.1);
+    border: 1px solid rgba(197, 160, 89, 0.35);
+    color: #e7cb92;
+    font-size: 0.82rem;
+    letter-spacing: 0.01em;
+}
+
+.viewer-trust-badge strong {
+    color: #f0d78c;
+}
+
+.viewer-trust-check {
     display: flex;
     align-items: center;
-    gap: 12px;
-}
-
-.viewer-stars {
-    display: flex;
-    gap: 4px;
-    font-size: 1.2rem;
-    color: #ffc107;
-}
-
-.viewer-rating-text {
-    color: #aaa;
-    font-size: 0.9rem;
+    justify-content: center;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: #c5a059;
+    color: #000;
+    font-size: 0.65rem;
+    font-weight: 900;
+    flex-shrink: 0;
 }
 
 .viewer-description {
@@ -1030,6 +893,69 @@ CARRITO MODAL - OVERLAY STYLE
     line-height: 1.5;
 }
 
+/* Botón de descuento 4Life — turquesa, deliberadamente distinto
+   del dorado de marca: es una salida hacia otra plataforma, no
+   una acción de Polarcsx, así que no debe confundirse con "Comprar". */
+.viewer-discount-btn {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    width: 100%;
+    padding: 12px 18px;
+    border-radius: 14px;
+    background: rgba(45, 212, 191, 0.1);
+    border: 1px solid rgba(45, 212, 191, 0.45);
+    text-decoration: none;
+    transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.viewer-discount-btn:hover {
+    background: rgba(45, 212, 191, 0.18);
+    transform: translateY(-2px);
+}
+
+.viewer-discount-label {
+    color: #2dd4bf;
+    font-weight: 700;
+    font-size: 0.9rem;
+}
+
+.viewer-discount-prices {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    flex-shrink: 0;
+}
+
+.viewer-discount-old {
+    color: #888;
+    text-decoration: line-through;
+    font-size: 0.85rem;
+}
+
+.viewer-discount-new {
+    color: #2dd4bf;
+    font-weight: 800;
+    font-size: 1.1rem;
+}
+
+@media (max-width: 480px) {
+    .viewer-discount-btn {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+.viewer-note {
+    color: #8a8a8a;
+    font-size: 0.78rem;
+    line-height: 1.5;
+    font-style: italic;
+    margin: -6px 0 0;
+    padding-left: 2px;
+}
+
 .viewer-benefits li::before {
     content: "✓";
     display: flex;
@@ -1045,46 +971,29 @@ CARRITO MODAL - OVERLAY STYLE
     font-size: 0.8rem;
 }
 
-.viewer-comments {
+/* Franja de confianza — llena el espacio que dejaron estrellas y
+   comentarios con algo que es cierto para TODA la tienda siempre,
+   sin depender de datos por producto. */
+.viewer-perks {
     display: flex;
-    flex-direction: column;
-    gap: 12px;
-    padding: 20px;
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.06);
-    border-radius: 16px;
+    flex-wrap: wrap;
+    gap: 16px;
+    padding: 14px 4px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-.viewer-comments h4 {
-    margin: 0;
-    color: #fff;
-    font-size: 0.95rem;
-    font-weight: 700;
-}
-
-.viewer-comment-item {
+.viewer-perks span {
     display: flex;
-    flex-direction: column;
-    gap: 6px;
-    padding: 12px 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-}
-
-.viewer-comment-item:last-child {
-    border-bottom: none;
-    padding-bottom: 0;
-}
-
-.viewer-comment-author {
-    color: #25D366;
-    font-weight: 600;
-    font-size: 0.85rem;
-}
-
-.viewer-comment-text {
+    align-items: center;
+    gap: 8px;
     color: #b0b0b0;
+    font-size: 0.82rem;
+}
+
+.viewer-perks i {
+    color: #c5a059;
     font-size: 0.9rem;
-    line-height: 1.6;
 }
 
 .viewer-actions {
@@ -1348,7 +1257,7 @@ filter:brightness(1.15);
 }
 
 .product-card:hover {
-    border-color: #bb86fc;
+    border-color: #c5a059;
     transform: translateY(-5px); /* Pequeño salto al pasar el mouse */
     box-shadow: 0 8px 20px rgba(0,0,0,0.5);
 }
@@ -1363,24 +1272,27 @@ filter:brightness(1.15);
     position: relative;
 }
 
-/* 3. Imagen grande y cuadrada */
+/* 3. Imagen: marco uniforme de marca — todas las fotos, sin importar
+   el proveedor u origen del producto, se ven dentro del mismo marco.
+   Esto es lo que sostiene la identidad tipo "vitrina" en todo el catálogo. */
 .product-image-container {
+    position: relative;
     width: 100%;
-    height: 220px; /* Altura uniforme para todas las fotos */
-    margin-right: 0;
-    margin-bottom: 15px; /* Separación con el título */
+    height: 220px;
+    margin-bottom: 15px;
     border-radius: 8px;
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #0a0a0a;
+    background: radial-gradient(circle at 50% 35%, #161616 0%, #0a0a0a 70%);
     overflow: hidden;
 }
 
 .product-image-container img.product-img {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Rellena el cuadro perfectamente */
+    object-fit: contain;
+    padding: 14px;
 }
 
 /* 4. Textos alineados y limpios */
@@ -1398,12 +1310,7 @@ filter:brightness(1.15);
     text-overflow: ellipsis; /* Corta textos larguísimos con "..." */
 }
 
-.price {
-    font-size: 1.3rem;
-    font-weight: bold;
-    color: #00ff37;
-    margin-top: 8px;
-}
+/* .price ya definido arriba como oculto (ver nota) */
 
 /* Reubicar el ícono de expandir (flechita) */
 .expand-icon {
@@ -1422,8 +1329,8 @@ filter:brightness(1.15);
 }
 
 .product-card:hover .expand-icon {
-    background: rgba(187, 134, 252, 0.2);
-    color: #bb86fc;
+    background: rgba(197, 160, 89, 0.2);
+    color: #c5a059;
 }
 
 /* =========================================
@@ -1616,6 +1523,55 @@ filter:brightness(1.15);
     border: 2px solid #0a0a0a;
 }
 
+/* ========================================
+   BOTÓN FLOTANTE — Instalar app (PWA)
+   Esquina inferior derecha, para no chocar con el carrito
+   (que está en la inferior izquierda). Oculto por defecto.
+   ======================================== */
+.fab-install-btn {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    display: none;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 20px;
+    border-radius: 999px;
+    border: none;
+    background: linear-gradient(135deg, #c5a059 0%, #9d8b5c 100%);
+    color: #000;
+    font-weight: 700;
+    font-size: 0.9rem;
+    cursor: pointer;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+    z-index: 3000;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.fab-install-btn.show {
+    display: flex;
+    animation: fabInstallPop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.fab-install-btn:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 12px 32px rgba(197, 160, 89, 0.5);
+}
+
+@keyframes fabInstallPop {
+    from { transform: scale(0.6); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+@media (max-width: 480px) {
+    .fab-install-btn span {
+        display: none; /* en pantallas chicas solo el ícono */
+    }
+    .fab-install-btn {
+        padding: 14px;
+    }
+}
+
 /* Animación de pulso al agregar un producto */
 @keyframes pulseCart {
     0%   { transform: scale(1); }
@@ -1791,10 +1747,6 @@ filter:brightness(1.15);
    TARJETAS — badge de precio sobre la imagen
    (identidad de marca: precio visible de inmediato)
    ======================================== */
-.product-image-container {
-    position: relative;
-}
-
 .price-badge {
     position: absolute;
     top: 10px;
@@ -1818,16 +1770,4 @@ filter:brightness(1.15);
         top: 8px;
         right: 8px;
     }
-}
-
-/* ------------------------------------------------------
-OPCIONAL — marco uniforme para fotos de estilos distintos
-Descomenta este bloque si quieres probarlo (ver mensaje)
-------------------------------------------------------*/
-.product-image-container {
-    background: radial-gradient(circle at 50% 35%, #161616 0%, #0a0a0a 70%);
-}
-.product-image-container img.product-img {
-    object-fit: contain;
-    padding: 14px;
 }

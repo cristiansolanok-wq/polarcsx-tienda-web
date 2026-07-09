@@ -1,20 +1,24 @@
 {
   "name": "Polarcsx Store",
   "short_name": "Polarcsx",
+  "description": "Catálogo Polarcsx: 4Life, postres, accesorios y servicios en un solo lugar.",
   "start_url": "/polarcsx-tienda-web/",
+  "scope": "/polarcsx-tienda-web/",
   "display": "standalone",
-  "background_color": "#ffffff",
-  "theme_color": "#000000",
+  "background_color": "#0a0a0a",
+  "theme_color": "#0a0a0a",
   "icons": [
     {
       "src": "img/logo.jpeg",
       "sizes": "192x192",
-      "type": "image/jpeg"
+      "type": "image/jpeg",
+      "purpose": "any"
     },
     {
       "src": "img/logo.jpeg",
       "sizes": "512x512",
-      "type": "image/jpeg"
+      "type": "image/jpeg",
+      "purpose": "any"
     }
   ]
-}  
+}

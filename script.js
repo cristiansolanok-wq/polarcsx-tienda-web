@@ -9,8 +9,83 @@
 // ================================================================
 
 // ========================================
-// PRODUCT VIEWER STATE
+// DESCUENTOS 4LIFE — EDITA SOLO AQUÍ
 // ========================================
+// Para activar el botón turquesa "Cómpralo con descuento" en un producto,
+// rellena su "link" (tu enlace de plataforma 4Life) y su "discountPrice"
+// (precio con descuento, número, sin signo de $).
+// Mientras un producto tenga link vacío o discountPrice en 0, el botón
+// simplemente no aparece en ese producto — no rompe nada dejarlo así.
+// El "id" de cada producto es el mismo que ya usa el carrito, y coincide
+// con data-product-id en el HTML de esa tarjeta.
+const FOURLIFE_DISCOUNTS = {
+    '4life-belle-vie':                  { link: 'HTTPS://mexico.4life.com/12665095', discountPrice: 897 },
+    '4life-transfer-factor-plus':       { link: 'HTTPS://mexico.4life.com/12665095', discountPrice: 1071 },
+    '4life-gold-factor':                { link: 'HTTPS://mexico.4life.com/12665095', discountPrice: 1087 },
+    '4life-colageno':                   { link: 'HTTPS://mexico.4life.com/12665095', discountPrice: 690 },
+    '4life-vistari':                    { link: 'HTTPS://mexico.4life.com/12665095', discountPrice: 965 },
+    '4life-reflexion':                  { link: 'HTTPS://mexico.4life.com/12665095', discountPrice: 1039 },
+    '4life-tfbcv-trifactor-formula':    { link: 'HTTPS://mexico.4life.com/12665095', discountPrice: 1092 },
+    '4life-glutamine-prime':            { link: 'HTTPS://mexico.4life.com/12665095', discountPrice: 619 },
+    '4life-tfa-g-pro':                  { link: 'HTTPS://mexico.4life.com/12665095', discountPrice: 1051 },
+    '4life-prezoom':                    { link: 'HTTPS://mexico.4life.com/12665095', discountPrice: 1017 },
+    '4life-nutrastart':                 { link: 'https://mexico.4life.com/12665095', discountPrice: 962 },
+    '4life-bioefa':                     { link: 'https://mexico.4life.com/12665095', discountPrice: 442 },
+    '4life-aloe-vera-stix-tropical':    { link: 'https://mexico.4life.com/12665095', discountPrice: 577 },
+    '4life-pasta-dental':               { link: 'https://mexico.4life.com/12665095', discountPrice: 306 },
+    '4life-enummi-formula-concentrada': { link: 'https://mexico.4life.com/12665095', discountPrice: 326 },
+    '4life-energy-go-sticks':           { link: 'https://mexico.4life.com/12665095', discountPrice: 570 },
+    '4life-renuvo':                     { link: 'HTTPS://mexico.4life.com/12665095', discountPrice: 944 },
+    '4life-riovida-burst':              { link: 'https://mexico.4life.com/12665095', discountPrice: 739 },
+    '4life-tform-man':                  { link: 'https://mexico.4life.com/12665095', discountPrice: 0 },
+    '4life-tform-shprite':              { link: 'https://mexico.4life.com/12665095', discountPrice: 0 },
+    '4life-rio-vida':                   { link: 'https://mexico.4life.com/12665095', discountPrice: 787 },
+};
+
+// ========================================
+// COLOR POR CATEGORÍA — identidad visual
+// Cada categoría de bienestar tiene su propio tono, así el texto
+// ya no es un solo morado plano para todo el catálogo.
+// ========================================
+const CATEGORY_COLORS = {
+    '4life':                 '#2dd4bf', // teal — bienestar general
+    'bienestar-integral':    '#a78bfa', // violeta
+    'salud-femenina':        '#f472b6', // rosa
+    'salud-masculina':       '#60a5fa', // azul acero
+    'sistema-inmunologico':  '#facc15', // ámbar
+    'energia-vitalidad':     '#fb923c', // naranja
+    'salud-digestiva':       '#a3e635', // verde lima
+    'postres':                '#ff6ec7', // magenta postres
+    'accesorios':             '#22d3ee', // turquesa
+    'servicios':               '#38bdf8', // azul claro
+};
+
+function applyCategoryColors() {
+    document.querySelectorAll('.product-card').forEach(card => {
+        const subtitle = card.querySelector('.product-subtitle');
+        if (!subtitle) return;
+        const color = CATEGORY_COLORS[card.dataset.category];
+        if (color) subtitle.style.color = color;
+    });
+}
+
+// ========================================
+// FAMILIA "4LIFE" — para el filtro de categorías
+// Muchos productos 4Life están etiquetados con su categoría de
+// bienestar específica (ej. "salud-femenina") en vez de "4life"
+// a secas. Sin esto, el botón de filtro "4life" los deja fuera.
+// ========================================
+const FOURLIFE_FAMILY = new Set([
+    '4life',
+    'bienestar-integral',
+    'salud-femenina',
+    'salud-masculina',
+    'sistema-inmunologico',
+    'energia-vitalidad',
+    'salud-digestiva',
+]);
+
+
 const viewerState = {
     isOpen: false,
     scrollPosition: 0,
@@ -31,9 +106,13 @@ function extractProductData(cardElement) {
     // Extract description
     const descriptionEl = cardElement.querySelector('.product-description');
     let description = '';
+    let note = '';
     if (descriptionEl) {
         const paraEl = descriptionEl.querySelector('p:first-of-type');
         description = paraEl?.innerHTML.trim() || '';
+        // Aviso/nota chiquita (ej. "*Precio de referencia...") que antes se perdía
+        const noteEl = descriptionEl.querySelector('small');
+        note = noteEl?.textContent.trim() || '';
     }
 
     // Extract benefits (ul with li items)
@@ -45,42 +124,40 @@ function extractProductData(cardElement) {
         );
     }
 
-    // Extract rating
-    const starEl = cardElement.querySelector('.star-rating');
-    let rating = '5.0';
-    let reviewCount = '0';
-    if (starEl) {
-        const ratingText = starEl.textContent.match(/[\d.]+\s*de\s*5/);
-        if (ratingText) rating = ratingText[0].split(' ')[0];
-        const countText = starEl.textContent.match(/\(([0-9,]+)/);
-        if (countText) reviewCount = countText[1];
-    }
-
-    // Extract comments
-    let comments = [];
-    const commentEls = cardElement.querySelectorAll('.comment');
-    if (commentEls.length > 0) {
-        comments = Array.from(commentEls).map(c => {
-            const userEl = c.querySelector('.user');
-            const userName = userEl?.textContent.trim() || 'Usuario';
-            const commentText = c.textContent.replace(userName, '').trim().substring(2); // Remove "- "
-            return { name: userName, text: commentText };
-        });
-    }
-
     return {
         id: productId,
         title,
         priceText,
         price: parsePriceText(priceText),
         imageSrc,
-        category,
+        category: formatCategoryLabel(category),
         description,
+        note,
         benefits,
-        rating: parseFloat(rating),
-        reviewCount,
-        comments,
     };
+}
+
+// ========================================
+// PRODUCT VIEWER - ETIQUETA DE CATEGORÍA
+// Convierte el slug interno (ej. "sistema-inmunologico")
+// en un texto de vitrina legible. Así la categoría se ve
+// como parte de la identidad de la tienda, no como un dato crudo.
+// ========================================
+function formatCategoryLabel(categorySlug) {
+    const labels = {
+        '4life': '4Life · Bienestar',
+        'postres': 'Postres',
+        'accesorios': 'Accesorios',
+        'servicios': 'Servicios',
+        'bienestar-integral': 'Bienestar Integral',
+        'energia-vitalidad': 'Energía y Vitalidad',
+        'salud-digestiva': 'Salud Digestiva',
+        'salud-femenina': 'Salud Femenina',
+        'salud-masculina': 'Salud Masculina',
+        'sistema-inmunologico': 'Sistema Inmunológico',
+        'all': 'Polarcsx',
+    };
+    return labels[categorySlug] || 'Polarcsx';
 }
 
 // ========================================
@@ -127,10 +204,6 @@ function renderProductViewer(productData) {
         return;
     }
 
-    // Build stars HTML
-    const starsHtml = '★'.repeat(Math.round(productData.rating)) + 
-                      '☆'.repeat(5 - Math.round(productData.rating));
-
     // Build benefits HTML
     let benefitsHtml = '';
     if (productData.benefits.length > 0) {
@@ -144,19 +217,18 @@ function renderProductViewer(productData) {
         `;
     }
 
-    // Build comments HTML
-    let commentsHtml = '';
-    if (productData.comments.length > 0) {
-        commentsHtml = `
-            <div class="viewer-comments">
-                <h4>Comentarios de compradores</h4>
-                ${productData.comments.map(c => `
-                    <div class="viewer-comment-item">
-                        <span class="viewer-comment-author">${c.name}</span>
-                        <span class="viewer-comment-text">${c.text}</span>
-                    </div>
-                `).join('')}
-            </div>
+    // Build 4Life discount button HTML (solo si está configurado)
+    let discountHtml = '';
+    const discountInfo = FOURLIFE_DISCOUNTS[productData.id];
+    if (discountInfo && discountInfo.link && discountInfo.discountPrice > 0) {
+        discountHtml = `
+            <a class="viewer-discount-btn" href="${discountInfo.link}" target="_blank" rel="noopener noreferrer">
+                <span class="viewer-discount-label">Cómpralo con descuento en 4Life</span>
+                <span class="viewer-discount-prices">
+                    <span class="viewer-discount-old">${productData.priceText}</span>
+                    <span class="viewer-discount-new">$${discountInfo.discountPrice.toFixed(2)}</span>
+                </span>
+            </a>
         `;
     }
 
@@ -172,19 +244,28 @@ function renderProductViewer(productData) {
                 <div class="viewer-header">
                     <span class="viewer-category">${productData.category}</span>
                     <h2 class="viewer-title">${productData.title}</h2>
-                    <div class="viewer-rating">
-                        <span class="viewer-stars">${starsHtml}</span>
-                        <span class="viewer-rating-text">(${productData.reviewCount} opiniones)</span>
-                    </div>
                 </div>
                 
                 <div class="viewer-price">${productData.priceText}</div>
+
+                <div class="viewer-trust-badge">
+                    <span class="viewer-trust-check">✓</span>
+                    Vendido y garantizado por <strong>Polarcsx</strong>
+                </div>
+
+                ${discountHtml}
                 
                 <div class="viewer-description">${productData.description}</div>
                 
                 ${benefitsHtml}
                 
-                ${commentsHtml}
+                ${productData.note ? `<p class="viewer-note">${productData.note}</p>` : ''}
+
+                <div class="viewer-perks">
+                    <span><i class="fa-solid fa-truck-fast"></i> Envío a todo México</span>
+                    <span><i class="fa-solid fa-lock"></i> Pago seguro</span>
+                    <span><i class="fa-brands fa-whatsapp"></i> Soporte directo</span>
+                </div>
                 
 <div class="viewer-actions">
     <button class="viewer-buy-btn" onclick="buyNowWhatsApp('${productData.title.replace(/'/g, "\\'")}', ${productData.price}, viewerState.currentQty)">
@@ -236,8 +317,11 @@ function closeProductViewer() {
     if (!modal || !viewerState.isOpen) return;
 
     modal.classList.remove('open');
-    document.body.style.overflow = '';
     viewerState.isOpen = false;
+    const cartModal = document.getElementById('cart-modal');
+    if (!cartModal || !cartModal.classList.contains('open')) {
+        document.body.style.overflow = '';
+    }
 
     // Restore scroll position with small delay for smooth animation
     setTimeout(() => {
@@ -309,7 +393,11 @@ function filterCategory(category) {
         const cardCategory = card.dataset.category;
         const details = card.querySelector('.product-details');
 
-        if (category === 'all' || cardCategory === category) {
+        const matches = category === 'all'
+            || cardCategory === category
+            || (category === '4life' && FOURLIFE_FAMILY.has(cardCategory));
+
+        if (matches) {
             card.style.display = '';
         } else {
             card.style.display = 'none';
@@ -330,6 +418,7 @@ if (document.readyState === 'loading') {
         initializeLogoScroll();
         initCookieBanner();
         addPriceBadges();
+        applyCategoryColors();
     });
 } else {
     filterCategory('all');
@@ -338,7 +427,52 @@ if (document.readyState === 'loading') {
     initializeLogoScroll();
     initCookieBanner();
     addPriceBadges();
+    applyCategoryColors();
 }
+
+// Registro del service worker — necesario para que el navegador
+// considere la página "instalable" como app (PWA).
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js').catch((err) => {
+            console.error('No se pudo registrar el service worker:', err);
+        });
+    });
+}
+
+// ========================================
+// BOTÓN FLOTANTE — INSTALAR APP (PWA)
+// Chrome/Android disparan "beforeinstallprompt" solo cuando el sitio
+// cumple los requisitos de instalación. Antes de eso no hay nada que
+// mostrar — por eso el botón empieza oculto en el HTML.
+// ========================================
+let deferredInstallPrompt = null;
+
+window.addEventListener('beforeinstallprompt', (event) => {
+    event.preventDefault();
+    deferredInstallPrompt = event;
+    const btn = document.getElementById('fab-install-btn');
+    if (btn) btn.classList.add('show');
+});
+
+function installPWA() {
+    const btn = document.getElementById('fab-install-btn');
+    if (!deferredInstallPrompt) return;
+
+    deferredInstallPrompt.prompt();
+    deferredInstallPrompt.userChoice.finally(() => {
+        deferredInstallPrompt = null;
+        if (btn) btn.classList.remove('show');
+    });
+}
+
+// Si ya está instalada (o el usuario ya la instaló en esta sesión),
+// no tiene caso seguir mostrando el botón.
+window.addEventListener('appinstalled', () => {
+    const btn = document.getElementById('fab-install-btn');
+    if (btn) btn.classList.remove('show');
+    deferredInstallPrompt = null;
+});
 
 // ========================================
 // CARRITO DE COMPRAS
@@ -462,6 +596,7 @@ function openCartModal() {
     if (!cartModal) return;
     
     cartModal.classList.add('open');
+    document.body.style.overflow = 'hidden';
 }
 
 function closeCartModal() {
@@ -469,6 +604,10 @@ function closeCartModal() {
     if (!cartModal) return;
     
     cartModal.classList.remove('open');
+    // No liberar el scroll si el visor de producto sigue abierto encima
+    if (!viewerState.isOpen) {
+        document.body.style.overflow = '';
+    }
 }
 
 // ========================================
