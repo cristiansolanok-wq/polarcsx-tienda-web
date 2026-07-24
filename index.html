@@ -112,6 +112,13 @@
 <div class="catalog-section">
     <h2 class="catalog-title">| Catálogo de Productos</h2>
     
+    <div class="search-bar-wrap">
+        <i class="fa-solid fa-magnifying-glass search-icon"></i>
+        <input type="text" id="product-search" class="search-input" placeholder="Buscar producto o servicio..." oninput="searchProducts(this.value)" autocomplete="off">
+        <button type="button" id="search-clear-btn" class="search-clear-btn" onclick="clearSearch()" style="display:none;" aria-label="Limpiar búsqueda">✕</button>
+    </div>
+    <p id="search-empty-msg" class="search-empty-msg" style="display:none;">No encontramos productos con ese nombre. Intenta con otra palabra o revisa las categorías.</p>
+
     <div class="categories-bar">
         <div class="categories-left">
             <span class="categories-label">| CATEGORÍAS</span>
@@ -190,7 +197,7 @@
             <img src="img/gan30tipoc.jpg" alt="Cargador GaN 30W 1Hora" class="product-img" loading="lazy">
         </div>
         <div class="product-basic-info">
-            <h3>Cargador GaN 30W Tipo-C — 1Hora</h3>
+            <h3>Cargador GaN 30W Tipo C 1Hora</h3>
             <p class="product-subtitle">Carga rápida, puerto Tipo-C</p>
             <p class="price">$290.00 MXN*</p>
         </div>
@@ -1320,7 +1327,34 @@
 <!-- NOSOTROS -->
 <section id="nosotros" class="nosotros">
 <h2>¿Quiénes somos?</h2>
-<p>En Polarcsx store reunimos productos y soluciones hasta la puerta de tu casa con una tienda online disponible 24/7.</p>
+<p>Polarcsx nació de una idea simple: que conseguir lo que necesitas no debería depender de dónde vives.</p>
+<p>Empezamos en Macuspana ofreciendo tecnología y accesorios con atención directa y de confianza — sin vueltas, sin intermediarios que solo encarecen. Con el tiempo, la meta es crecer hacia algo más grande: una plataforma que conecte productos básicos con cada localidad, y que abra espacio para que más personas puedan emprender desde donde están.</p>
+<p>Vamos avanzando paso a paso, con los pies en la tierra y la mirada en algo más grande.</p>
+</section>
+
+<!-- HORARIOS Y DIRECCIÓN -->
+<section class="info-contacto">
+    <div class="info-contacto-item">
+        <i class="fa-solid fa-clock"></i>
+        <div>
+            <h4>Horario de atención</h4>
+            <p>Lunes a sábado, 8:00 a.m. – 12:00 p.m.</p>
+        </div>
+    </div>
+    <div class="info-contacto-item">
+        <i class="fa-solid fa-location-dot"></i>
+        <div>
+            <h4>Ubicación</h4>
+            <p>Macuspana, Tabasco</p>
+        </div>
+    </div>
+    <div class="info-contacto-item">
+        <i class="fa-solid fa-credit-card"></i>
+        <div>
+            <h4>Métodos de pago</h4>
+            <p>Transferencia y efectivo</p>
+        </div>
+    </div>
 </section>
 
 <!-- BENEFICIOS -->

@@ -381,24 +381,62 @@ function initializeProductViewer() {
 }
 
 
-function filterCategory(category) {
-    const buttons = document.querySelectorAll('.category-btn');
-    const cards = document.querySelectorAll('.product-card');
+let currentCategory = 'all';
+let currentSearchTerm = '';
 
+function filterCategory(category) {
+    currentCategory = category;
+    const buttons = document.querySelectorAll('.category-btn');
     buttons.forEach(button => {
         button.classList.toggle('active', button.dataset.category === category);
     });
+    applyProductFilters();
+}
+
+function searchProducts(term) {
+    currentSearchTerm = term.trim().toLowerCase();
+    const clearBtn = document.getElementById('search-clear-btn');
+    if (clearBtn) {
+        clearBtn.style.display = currentSearchTerm ? '' : 'none';
+    }
+    applyProductFilters();
+}
+
+function clearSearch() {
+    const input = document.getElementById('product-search');
+    if (input) input.value = '';
+    searchProducts('');
+}
+
+// Combina el filtro de categoría activo con el texto de búsqueda.
+// Ambos se aplican juntos: si buscas "cargador" con la categoría "4life"
+// activa, solo verás cargadores dentro de 4life (o nada, si no hay).
+function applyProductFilters() {
+    const cards = document.querySelectorAll('.product-card');
+    let visibleCount = 0;
 
     cards.forEach(card => {
         const cardCategory = card.dataset.category;
         const details = card.querySelector('.product-details');
 
-        const matches = category === 'all'
-            || cardCategory === category
-            || (category === '4life' && FOURLIFE_FAMILY.has(cardCategory));
+        const matchesCategory = currentCategory === 'all'
+            || cardCategory === currentCategory
+            || (currentCategory === '4life' && FOURLIFE_FAMILY.has(cardCategory));
+
+        let matchesSearch = true;
+        if (currentSearchTerm) {
+            const title = card.querySelector('h3');
+            const subtitle = card.querySelector('.product-subtitle');
+            const text = ((title ? title.textContent : '') + ' ' + (subtitle ? subtitle.textContent : ''))
+                .toLowerCase();
+            matchesSearch = text.includes(currentSearchTerm);
+        }
+
+        const matches = matchesCategory && matchesSearch;
 
         if (matches) {
             card.style.display = '';
+            visibleCount++;
         } else {
             card.style.display = 'none';
             card.classList.remove('active');
@@ -407,6 +445,11 @@ function filterCategory(category) {
             }
         }
     });
+
+    const emptyMsg = document.getElementById('search-empty-msg');
+    if (emptyMsg) {
+        emptyMsg.style.display = (currentSearchTerm && visibleCount === 0) ? '' : 'none';
+    }
 }
 
 // Inicializa mostrando todos los productos al cargar la página
