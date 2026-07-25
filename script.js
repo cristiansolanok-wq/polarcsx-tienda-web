@@ -43,6 +43,24 @@ const FOURLIFE_DISCOUNTS = {
 };
 
 // ========================================
+// ENLACES DE MARCA (TECNOLOGÍA) — EDITA SOLO AQUÍ
+// ========================================
+// Muestra un botón "Ver más de [marca]" en productos de Tecnología cuya
+// marca tenga tienda oficial verificada. Igual que arriba: si "link" está
+// vacío, el botón simplemente no aparece — no rompe nada dejarlo así.
+// IMPORTANTE: solo pon aquí URLs que hayas confirmado tú mismo. No inventes
+// links de "tienda oficial" — si está mal, se ve peor que no tener botón.
+const BRAND_LINKS = {
+    'tecnologia-cargador-gan-1hora': { brand: '1Hora', link: 'https://www.1hora.com' },
+    // Agrega aquí más productos 1Hora del lote nuevo cuando tengan su
+    // data-product-id definitivo, ej:
+    // 'tecnologia-audifonos-aut213': { brand: '1Hora', link: 'https://www.1hora.com' },
+    //
+    // Pendientes de URL confirmada (no inventar, dejar vacío hasta saberla):
+    // XbTod, FOL, Ridgeway, KaiPing, Buytiti
+};
+
+// ========================================
 // COLOR POR CATEGORÍA — identidad visual
 // Cada categoría de bienestar tiene su propio tono, así el texto
 // ya no es un solo morado plano para todo el catálogo.
@@ -103,19 +121,26 @@ function extractProductData(cardElement) {
     const category = cardElement.dataset.category || 'General';
     const productId = cardElement.dataset.productId || slugify(title);
 
-    // Extract description
-    const descriptionEl = cardElement.querySelector('.product-description');
+    // Extract description — soporta dos formatos de tarjeta:
+    // 1) 4Life: <div class="product-description"> con <p> y <small> adentro.
+    // 2) Tecnología/otros: <p class="description"> y <small><em> sueltos, sin wrapper.
+    // Antes solo se leía el formato 1, por eso Tecnología se veía sin texto en el visor.
+    const descriptionWrapEl = cardElement.querySelector('.product-description');
     let description = '';
     let note = '';
-    if (descriptionEl) {
-        const paraEl = descriptionEl.querySelector('p:first-of-type');
+    if (descriptionWrapEl) {
+        const paraEl = descriptionWrapEl.querySelector('p:first-of-type');
         description = paraEl?.innerHTML.trim() || '';
-        // Aviso/nota chiquita (ej. "*Precio de referencia...") que antes se perdía
-        const noteEl = descriptionEl.querySelector('small');
+        const noteEl = descriptionWrapEl.querySelector('small');
         note = noteEl?.textContent.trim() || '';
+    } else {
+        const simpleDescEl = cardElement.querySelector('p.description');
+        description = simpleDescEl?.innerHTML.trim() || '';
+        const simpleNoteEl = cardElement.querySelector('.details-content small');
+        note = simpleNoteEl?.textContent.trim() || '';
     }
 
-    // Extract benefits (ul with li items)
+    // Extract benefits (ul with li items) — solo existe en formato 4Life
     let benefits = [];
     const benefitsUl = cardElement.querySelector('.product-description ul');
     if (benefitsUl) {
@@ -204,6 +229,40 @@ function renderProductViewer(productData) {
         return;
     }
 
+    // SERVICIOS usa su propia plantilla simple: sin precio, sin cantidad,
+    // sin "comprar ahora" — un servicio se cotiza, no se compra con un clic.
+    if (productData.category === formatCategoryLabel('servicios')) {
+        modalBody.innerHTML = `
+            <div class="viewer-card viewer-card-servicio">
+                <div class="viewer-info viewer-info-servicio">
+                    <div class="viewer-header">
+                        <span class="viewer-category">${productData.category}</span>
+                        <h2 class="viewer-title">${productData.title}</h2>
+                    </div>
+
+                    <div class="viewer-trust-badge">
+                        <span class="viewer-trust-check">✓</span>
+                        Atendido directamente por <strong>Polarcsx</strong>
+                    </div>
+
+                    <div class="viewer-description">${productData.description}</div>
+
+                    <div class="viewer-actions">
+                        <button class="viewer-buy-btn" onclick="window.open('https://wa.me/529361577100?text=' + encodeURIComponent('Hola, quiero cotizar: ${productData.title.replace(/'/g, "\\'")}'), '_blank')">
+                            <i class="fa-brands fa-whatsapp"></i> Solicitar cotización por WhatsApp
+                        </button>
+                    </div>
+
+                    <p class="viewer-hint">Toca cualquier parte fuera para continuar.</p>
+                </div>
+            </div>
+        `;
+        modal.classList.add('open');
+        document.body.style.overflow = 'hidden';
+        viewerState.isOpen = true;
+        return;
+    }
+
     // Build benefits HTML
     let benefitsHtml = '';
     if (productData.benefits.length > 0) {
@@ -232,6 +291,18 @@ function renderProductViewer(productData) {
         `;
     }
 
+    // Build brand link button HTML (Tecnología — solo si está configurado)
+    let brandLinkHtml = '';
+    const brandInfo = BRAND_LINKS[productData.id];
+    if (brandInfo && brandInfo.link) {
+        brandLinkHtml = `
+            <a class="viewer-brand-btn" href="${brandInfo.link}" target="_blank" rel="noopener noreferrer">
+                <i class="fa-solid fa-shield-halved"></i>
+                <span>Ver más de ${brandInfo.brand}, marca oficial</span>
+            </a>
+        `;
+    }
+
     // Render complete viewer
     modalBody.innerHTML = `
         <div class="viewer-card">
@@ -254,6 +325,7 @@ function renderProductViewer(productData) {
                 </div>
 
                 ${discountHtml}
+                ${brandLinkHtml}
                 
                 <div class="viewer-description">${productData.description}</div>
                 

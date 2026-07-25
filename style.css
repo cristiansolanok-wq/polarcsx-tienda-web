@@ -940,6 +940,49 @@ CARRITO MODAL - OVERLAY STYLE
     font-size: 1.1rem;
 }
 
+/* Botón "Ver más de [marca]" — dorado (color de marca Polarcsx),
+   distinto del turquesa de 4Life para no confundir ambos orígenes. */
+.viewer-brand-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    padding: 12px 18px;
+    border-radius: 14px;
+    background: rgba(197, 160, 89, 0.1);
+    border: 1px solid rgba(197, 160, 89, 0.45);
+    text-decoration: none;
+    color: #c5a059;
+    font-weight: 700;
+    font-size: 0.9rem;
+    transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.viewer-brand-btn:hover {
+    background: rgba(197, 160, 89, 0.18);
+    transform: translateY(-2px);
+}
+
+/* Vista de SERVICIOS — sin imagen ni precio, una sola columna centrada */
+.viewer-card-servicio {
+    display: block;
+    max-width: 520px;
+    margin: 0 auto;
+}
+
+.viewer-info-servicio {
+    padding-top: 8px;
+}
+
+.viewer-info-servicio .viewer-buy-btn {
+    background: linear-gradient(90deg, #25D366, #0db14b);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
 @media (max-width: 480px) {
     .viewer-discount-btn {
         flex-direction: column;
@@ -1470,7 +1513,7 @@ filter:brightness(1.15);
     padding: 30px 25px;
     margin-top: 40px;
     background: #090909;
-    border: 1px solid #222;
+    border: 1px solid rgba(168, 183, 138, 0.3);
     border-radius: 20px;
     max-width: 1000px;
     margin-left: auto;
@@ -1485,7 +1528,7 @@ filter:brightness(1.15);
 }
 
 .info-contacto-item i {
-    color: #c5a059;
+    color: #a8b78a;
     font-size: 1.3rem;
     margin-top: 3px;
 }
