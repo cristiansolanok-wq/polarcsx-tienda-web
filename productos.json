@@ -260,6 +260,116 @@
     "note": "* Precio estimado, incluye margen de venta local. El costo final se confirma por WhatsApp."
   },
   {
+    "id": "refaccionaria-aceite-castrol-20w50",
+    "category": "refaccionaria",
+    "title": "Aceite Castrol GTX 20W-50",
+    "subtitle": "Lubricante premium para motores",
+    "price": "$189.00 MXN*",
+    "imageSrc": "",
+    "description": "Protege el motor contra desgaste y pérdidas de rendimiento, ideal para uso diario y condiciones de temperatura elevadas.",
+    "note": "Precio referencial; confirma disponibilidad y precio final por WhatsApp."
+  },
+  {
+    "id": "refaccionaria-filtro-aceite-universal",
+    "category": "refaccionaria",
+    "title": "Filtro de aceite universal",
+    "subtitle": "Mantenimiento esencial con ajuste versátil",
+    "price": "$95.00 MXN*",
+    "imageSrc": "",
+    "description": "Filtra partículas y residuos para prolongar la vida útil del aceite y proteger el motor.",
+    "note": "Precio referencial; confirma compatibilidad con tu vehículo."
+  },
+  {
+    "id": "refaccionaria-filtro-aire-universal",
+    "category": "refaccionaria",
+    "title": "Filtro de aire para motor",
+    "subtitle": "Flujo limpio para rendimiento estable",
+    "price": "$110.00 MXN*",
+    "imageSrc": "",
+    "description": "Reduce polvo y suciedad en el aire de admisión, mejorando la eficiencia y respuesta del motor.",
+    "note": "Precio referencial; consulta modelo exacto antes de comprar."
+  },
+  {
+    "id": "refaccionaria-bujia-ngk",
+    "category": "refaccionaria",
+    "title": "Bujía NGK",
+    "subtitle": "Encendido preciso y confiable",
+    "price": "$95.00 MXN*",
+    "imageSrc": "",
+    "description": "Mejora la chispa de encendido y ayuda a un consumo más eficiente de combustible.",
+    "note": "Precio referencial; confirma número de pieza para tu motor."
+  },
+  {
+    "id": "refaccionaria-pastillas-freno-delanteras",
+    "category": "refaccionaria",
+    "title": "Pastillas de freno delanteras",
+    "subtitle": "Frenado seguro y controlado",
+    "price": "$220.00 MXN*",
+    "imageSrc": "",
+    "description": "Diseñadas para ofrecer buena dosificación y resistencia en frenadas frecuentes.",
+    "note": "Precio referencial; confirma vehículo y tipo de freno."
+  },
+  {
+    "id": "refaccionaria-bombilla-halogen-h4",
+    "category": "refaccionaria",
+    "title": "Bombilla halógena H4",
+    "subtitle": "Iluminación clara para vías nocturnas",
+    "price": "$75.00 MXN*",
+    "imageSrc": "",
+    "description": "Mejora la visibilidad en carretera con luz blanca brillante y foco duradero.",
+    "note": "Precio referencial; revisa compatibilidad con faros."
+  },
+  {
+    "id": "refaccionaria-limpiador-frenos",
+    "category": "refaccionaria",
+    "title": "Limpiador de frenos",
+    "subtitle": "Desengrasa y acelera el mantenimiento",
+    "price": "$125.00 MXN*",
+    "imageSrc": "",
+    "description": "Elimina grasa, polvo metálico y suciedad para frenos más eficientes y silenciosos.",
+    "note": "Precio referencial; ideal para servicios de mantenimiento."
+  },
+  {
+    "id": "refaccionaria-refrigerante",
+    "category": "refaccionaria",
+    "title": "Refrigerante/anticongelante",
+    "subtitle": "Protección térmica para el motor",
+    "price": "$130.00 MXN*",
+    "imageSrc": "",
+    "description": "Mantiene el motor a temperatura óptima y evita corrosión en el radiador.",
+    "note": "Precio referencial; ideal para servicios de climatización del motor."
+  },
+  {
+    "id": "refaccionaria-grasa-multiproposito",
+    "category": "refaccionaria",
+    "title": "Grasa multipropósito",
+    "subtitle": "Lubricación para piezas móviles",
+    "price": "$85.00 MXN*",
+    "imageSrc": "",
+    "description": "Protege bisagras, rodamientos y piezas expuestas al desgaste.",
+    "note": "Precio referencial; útil en revisión de mantenimiento general."
+  },
+  {
+    "id": "refaccionaria-silicona-sellador",
+    "category": "refaccionaria",
+    "title": "Silicón sellador 310ml",
+    "subtitle": "Sellado resistente a aceite y temperatura",
+    "price": "$85.00 MXN*",
+    "imageSrc": "",
+    "description": "Ideal para sellar juntas, tapas de válvulas y conexiones expuestas.",
+    "note": "Precio referencial; producto básico para talleres y refaccionarias."
+  },
+  {
+    "id": "refaccionaria-aceite-transmision",
+    "category": "refaccionaria",
+    "title": "Aceite ATF transmisión",
+    "subtitle": "Cambio suave y protección de engranajes",
+    "price": "$210.00 MXN*",
+    "imageSrc": "",
+    "description": "Optimiza cambios automáticos y prolonga la vida de la transmisión.",
+    "note": "Precio referencial; confirma tipo de transmisión."
+  },
+  {
     "id": "servicio-plomeria",
     "category": "servicios",
     "title": "Servicio de Plomería",
