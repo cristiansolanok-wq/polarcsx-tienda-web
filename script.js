@@ -75,6 +75,7 @@ const CATEGORY_COLORS = {
     'salud-digestiva':       '#a3e635', // verde lima
     'postres':                '#ff6ec7', // magenta postres
     'accesorios':             '#22d3ee', // turquesa
+    'refaccionaria':          '#f97316', // naranja/refacciones
     'servicios':               '#38bdf8', // azul claro
 };
 
@@ -84,6 +85,93 @@ function applyCategoryColors() {
         if (!subtitle) return;
         const color = CATEGORY_COLORS[card.dataset.category];
         if (color) subtitle.style.color = color;
+    });
+}
+
+const REFACCIONARIA_PRODUCTS = [
+    { id: 'refaccionaria-aceite-castrol-20w50', title: 'Aceite Castrol GTX 20W-50', subtitle: 'Lubricante premium para motores clásicos y modernos', price: 189.00, category: 'refaccionaria', imageSrc: '', description: 'Protege el motor contra desgaste y pérdidas de rendimiento, ideal para uso diario y condiciones de temperatura elevadas.', note: 'Precio referencial; confirma disponibilidad y precio final por WhatsApp.' },
+    { id: 'refaccionaria-aceite-akron-20w50', title: 'Aceite Akron 20W-50', subtitle: 'Alta resistencia para lubricación continua', price: 175.00, category: 'refaccionaria', imageSrc: '', description: 'Formulado para proteger componentes claves del motor en cargas pesadas y temperaturas altas.', note: 'Precio referencial; confirma disponibilidad y precio final por WhatsApp.' },
+    { id: 'refaccionaria-aceite-mobil-15w40', title: 'Aceite Mobil 15W-40', subtitle: 'Lubricante multitasking para motores de trabajo', price: 215.00, category: 'refaccionaria', imageSrc: '', description: 'Diseñado para operar en diferentes condiciones de temperatura, con protección anticorrosión y control de depósitos.', note: 'Precio referencial; confirma disponibilidad y precio final por WhatsApp.' },
+    { id: 'refaccionaria-aceite-valvoline-20w50', title: 'Aceite Valvoline 20W-50', subtitle: 'Protección confiable para motores de alto kilometraje', price: 182.00, category: 'refaccionaria', imageSrc: '', description: 'Reducción de desgaste y estabilidad en régimen de alta temperatura para vehículos de uso constante.', note: 'Precio referencial; confirma disponibilidad y precio final por WhatsApp.' },
+    { id: 'refaccionaria-filtro-aceite-universal', title: 'Filtro de aceite universal', subtitle: 'Mantenimiento esencial con ajuste versátil', price: 95.00, category: 'refaccionaria', imageSrc: '', description: 'Filtra partículas y residuos para prolongar la vida útil del aceite y proteger el motor.', note: 'Precio referencial; confirma compatibilidad con tu vehículo.' },
+    { id: 'refaccionaria-filtro-aire-universal', title: 'Filtro de aire para motor', subtitle: 'Flujo limpio para rendimiento estable', price: 110.00, category: 'refaccionaria', imageSrc: '', description: 'Reduce polvo y suciedad en el aire de admisión, mejorando la eficiencia y respuesta del motor.', note: 'Precio referencial; consulta modelo exacto antes de comprar.' },
+    { id: 'refaccionaria-filtro-cabina', title: 'Filtro de cabina', subtitle: 'Aire limpio para el interior del vehículo', price: 125.00, category: 'refaccionaria', imageSrc: '', description: 'Mejora confort y calidad de aire al filtrar polvo, polen y partículas en el habitáculo.', note: 'Precio referencial; verifica el modelo de tu auto.' },
+    { id: 'refaccionaria-bujia-ngk', title: 'Bujía NGK', subtitle: 'Encendido preciso y confiable', price: 95.00, category: 'refaccionaria', imageSrc: '', description: 'Mejora la chispa de encendido y apoya un consumo más eficiente de combustible.', note: 'Precio referencial; confirma número de pieza para tu motor.' },
+    { id: 'refaccionaria-bujia-bosch', title: 'Bujía Bosch', subtitle: 'Larga vida útil y rendimiento estable', price: 99.00, category: 'refaccionaria', imageSrc: '', description: 'Construcción durable que ofrece ignición consistente en condiciones de uso exigente.', note: 'Precio referencial; consulta compatibilidad con tu vehículo.' },
+    { id: 'refaccionaria-pastillas-freno-delanteras', title: 'Pastillas de freno delanteras', subtitle: 'Frenado seguro y controlado', price: 220.00, category: 'refaccionaria', imageSrc: '', description: 'Diseñadas para ofrecer buena dosificación y resistencia en frenadas frecuentes.', note: 'Precio referencial; confirma vehículo y tipo de freno.' },
+    { id: 'refaccionaria-pastillas-freno-traseras', title: 'Pastillas de freno traseras', subtitle: 'Freno estable en maniobras y pendientes', price: 210.00, category: 'refaccionaria', imageSrc: '', description: 'Excelente opción para mantenimiento de frenado trasero en autos y camionetas.', note: 'Precio referencial; verifica compatibilidad antes de comprar.' },
+    { id: 'refaccionaria-balancedas', title: 'Balatas de freno', subtitle: 'Desgaste lento y rendimiento confiable', price: 165.00, category: 'refaccionaria', imageSrc: '', description: 'Maximiza la seguridad en el sistema de frenos con un material de fricción estable.', note: 'Precio referencial; consulta segundo eje y vehículo.' },
+    { id: 'refaccionaria-bombilla-halogen-h4', title: 'Bombilla halógena H4', subtitle: 'Iluminación clara para vías nocturnas', price: 75.00, category: 'refaccionaria', imageSrc: '', description: 'Mejora la visibilidad en carretera con luz blanca brillante y foco duradero.', note: 'Precio referencial; revisa compatibilidad con faros.' },
+    { id: 'refaccionaria-bombilla-led-interior', title: 'Lámpara LED interior 12V', subtitle: 'Ambiente moderno dentro del auto', price: 45.00, category: 'refaccionaria', imageSrc: '', description: 'Reemplazo eficiente para iluminación interior o de cajuela, con bajo consumo.', note: 'Precio referencial; ideal para actualización rápida.' },
+    { id: 'refaccionaria-limpiador-frenos', title: 'Limpiador de frenos', subtitle: 'Desengrasa y acelera el mantenimiento', price: 125.00, category: 'refaccionaria', imageSrc: '', description: 'Elimina grasa, polvo metálico y suciedad para frenos más eficientes y silenciosos.', note: 'Precio referencial; ideal para servicios de mantenimiento.' },
+    { id: 'refaccionaria-limpiador-inyectores', title: 'Limpiador de inyectores', subtitle: 'Restaura rendimiento del sistema de combustible', price: 142.00, category: 'refaccionaria', imageSrc: '', description: 'Ayuda a eliminar depósitos en inyectores y mejorar la combustión.', note: 'Precio referencial; añádelo durante tu servicio de mantenimiento.' },
+    { id: 'refaccionaria-destilado', title: 'Líquido de frenos DOT 4', subtitle: 'Máxima seguridad en el circuito hidráulico', price: 145.00, category: 'refaccionaria', imageSrc: '', description: 'Asegura frenos sensibles y sin pérdida de potencia bajo calor.', note: 'Precio referencial; consulta cantidad necesaria por servicio.' },
+    { id: 'refaccionaria-refrigerante', title: 'Refrigerante/anticongelante', subtitle: 'Protección térmica para el motor', price: 130.00, category: 'refaccionaria', imageSrc: '', description: 'Mantiene el motor a temperatura óptima y evita corrosión en el radiador.', note: 'Precio referencial; ideal para servicios de climatización del motor.' },
+    { id: 'refaccionaria-grasa-multiproposito', title: 'Grasa multipropósito', subtitle: 'Lubricación para piezas móviles', price: 85.00, category: 'refaccionaria', imageSrc: '', description: 'Protege bisagras, rodamientos y piezas expuestas al desgaste.', note: 'Precio referencial; útil en revisión de mantenimiento general.' },
+    { id: 'refaccionaria-cinta-adhesiva', title: 'Cinta automotriz resistente', subtitle: 'Sujeción temporal en instalaciones y reparaciones', price: 58.00, category: 'refaccionaria', imageSrc: '', description: 'Adhesivo fuerte para fijaciones rápidas en componentes eléctricos y tuberías.', note: 'Precio referencial; útil tanto en taller como tienda.' },
+    { id: 'refaccionaria-aceite-transmision', title: 'Aceite ATF transmisión', subtitle: 'Cambio suave y protección de engranajes', price: 210.00, category: 'refaccionaria', imageSrc: '', description: 'Optimiza cambios automáticos y prolonga la vida de la transmisión.', note: 'Precio referencial; confirma tipo de transmisión.' },
+    { id: 'refaccionaria-aceite-direccion', title: 'Aceite dirección hidráulica', subtitle: 'Manejo más suave y sin chirridos', price: 120.00, category: 'refaccionaria', imageSrc: '', description: 'Protege la bomba y el sistema hidráulico para una dirección cómoda.', note: 'Precio referencial; verifica especificaciones del vehículo.' },
+    { id: 'refaccionaria-silicona-sellador', title: 'Silicón sellador 310ml', subtitle: 'Sellado resistente a aceite y temperatura', price: 85.00, category: 'refaccionaria', imageSrc: '', description: 'Ideal para sellar juntas, tapas de válvulas y conexiones expuestas.', note: 'Precio referencial; producto básico para talleres y refaccionarias.' },
+    { id: 'refaccionaria-cable-bujias', title: 'Cables de bujía', subtitle: 'Conductividad confiable para encendido', price: 135.00, category: 'refaccionaria', imageSrc: '', description: 'Reemplazo que mejora la chispa y reduce fallos de encendido.', note: 'Precio referencial; revisa número de cilindros y longitud.' },
+    { id: 'refaccionaria-kit-embargue', title: 'Kit de embrague básico', subtitle: 'Cambio completo para rendimiento uniforme', price: 520.00, category: 'refaccionaria', imageSrc: '', description: 'Incluye disco, prensa y rodamiento para servicio completo de embrague.', note: 'Precio referencial; confirmar modelo y año del vehículo.' },
+    { id: 'refaccionaria-filtro-combustible', title: 'Filtro de combustible', subtitle: 'Protección para la bomba y los inyectores', price: 145.00, category: 'refaccionaria', imageSrc: '', description: 'Retiene sedimentos y evita obstrucciones en el sistema de alimentación.', note: 'Precio referencial; valida compatibilidad con tu auto.' },
+    { id: 'refaccionaria-pastillas-clutch', title: 'Pastillas de clutch', subtitle: 'Fricción firme y control de embrague', price: 175.00, category: 'refaccionaria', imageSrc: '', description: 'Repuesto clave para un acoplamiento suave y sin deslizado.', note: 'Precio referencial; confirma el tipo de vehículo.' },
+    { id: 'refaccionaria-lubricante-cadenas', title: 'Lubricante para cadenas', subtitle: 'Protección para componentes expuestos', price: 95.00, category: 'refaccionaria', imageSrc: '', description: 'Solución práctica para proteger piezas móviles de polvo y humedad.', note: 'Precio referencial; ideal para talleres y mantenimiento rápido.' },
+    { id: 'refaccionaria-balatas-ceramicas', title: 'Balatas cerámicas', subtitle: 'Frenado silencioso y estable', price: 240.00, category: 'refaccionaria', imageSrc: '', description: 'Diseñadas para ofrecer durabilidad y menor ruido en el sistema de frenos.', note: 'Precio referencial; confirma tipo de balata según vehículo.' },
+    { id: 'refaccionaria-filtro-aceite-motor', title: 'Filtro de aceite motor', subtitle: 'Repuesto esencial para mantenimiento', price: 89.00, category: 'refaccionaria', imageSrc: '', description: 'Mantiene limpio el aceite al retener residuos y partículas finas.', note: 'Precio referencial; verifica compatibilidad con tu motor.' },
+    { id: 'refaccionaria-parche-antipinchazos', title: 'Kit antipinchazos', subtitle: 'Respuesta rápida en caso de emergencias', price: 75.00, category: 'refaccionaria', imageSrc: '', description: 'Incluye parches y adhesivos para reparar pinchazos temporales.', note: 'Precio referencial; ideal para talleres y flotillas de vehículos.' },
+    { id: 'refaccionaria-lubricante-multiproposito', title: 'Spray lubricante multiuso', subtitle: 'Despega piezas atascadas y protege superficies', price: 78.00, category: 'refaccionaria', imageSrc: '', description: 'Perfecto para bisagras, cierres y piezas que requieren mantenimiento rápido.', note: 'Precio referencial; útil en servicios de taller y refaccionaria.' }
+];
+
+function renderRefaccionariaProducts() {
+    const container = document.querySelector('.products-grid');
+    if (!container) return;
+
+    const sectionHeading = document.createElement('div');
+    sectionHeading.className = 'section-title refaccionaria-title';
+    sectionHeading.innerHTML = `
+        <div class="section-title-text">
+            <h2>Refaccionaria de alta rotación</h2>
+            <p>Productos básicos para tu taller y tu tienda, seleccionados por su demanda continua.</p>
+        </div>
+    `;
+    container.appendChild(sectionHeading);
+
+    REFACCIONARIA_PRODUCTS.forEach(product => {
+        const card = document.createElement('div');
+        card.className = 'product-card';
+        card.dataset.category = product.category;
+        card.dataset.productId = product.id;
+
+        const imageHtml = product.imageSrc
+            ? `<div class="product-image-container"><img src="${product.imageSrc}" alt="${product.title}" class="product-img" loading="lazy"></div>`
+            : `<div class="product-image-container placeholder"><span>Imagen disponible</span></div>`;
+
+        card.innerHTML = `
+            <div class="product-summary">
+                ${imageHtml}
+                <div class="product-basic-info">
+                    <h3>${product.title}</h3>
+                    <p class="product-subtitle">${product.subtitle}</p>
+                    <div class="product-meta">
+                        <span class="product-tag">Refacción esencial</span>
+                        <p class="price">$${product.price.toFixed(2)} MXN*</p>
+                    </div>
+                </div>
+                <span class="expand-icon"><i class="fa-solid fa-chevron-down"></i></span>
+            </div>
+            <div class="product-details">
+                <div class="details-content">
+                    <p class="description">${product.description}</p>
+                    <p><small><em>${product.note}</em></small></p>
+                    <button class="buy-btn" onclick="addToCart('${product.title.replace(/'/g, "\\'")}', ${product.price}, '${product.id}')">
+                        Añadir al carrito
+                    </button>
+                </div>
+            </div>
+        `;
+
+        container.appendChild(card);
     });
 }
 
@@ -173,6 +261,7 @@ function formatCategoryLabel(categorySlug) {
         '4life': '4Life · Bienestar',
         'postres': 'Postres',
         'accesorios': 'Accesorios',
+        'refaccionaria': 'Refaccionaria',
         'servicios': 'Servicios',
         'bienestar-integral': 'Bienestar Integral',
         'energia-vitalidad': 'Energía y Vitalidad',
@@ -253,7 +342,7 @@ function renderProductViewer(productData) {
                         </button>
                     </div>
 
-                    <p class="viewer-hint">Toca cualquier parte fuera para continuar.</p>
+                    <p class="viewer-hint">Presiona la X para cerrar este panel.</p>
                 </div>
             </div>
         `;
@@ -339,6 +428,8 @@ function renderProductViewer(productData) {
                     <span><i class="fa-brands fa-whatsapp"></i> Soporte directo</span>
                 </div>
                 
+                <p class="viewer-hint top">Presiona la X en la esquina superior para cerrar el panel.</p>
+
 <div class="viewer-actions">
     <button class="viewer-buy-btn" onclick="buyNowWhatsApp('${productData.title.replace(/'/g, "\\'")}', ${productData.price}, viewerState.currentQty)">
         Comprar ahora
@@ -352,8 +443,6 @@ function renderProductViewer(productData) {
     <span id="viewer-qty-value" class="qty-value">1</span>
     <button class="qty-btn" onclick="changeViewerQty(1)">+</button>
 </div>
-                
-                <p class="viewer-hint">Toca cualquier parte fuera del producto para continuar.</p>
             </div>
         </div>
     `;
@@ -527,6 +616,7 @@ function applyProductFilters() {
 // Inicializa mostrando todos los productos al cargar la página
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', () => {
+        renderRefaccionariaProducts();
         filterCategory('all');
         updateCartUI();
         initializeProductViewer();
@@ -536,6 +626,7 @@ if (document.readyState === 'loading') {
         applyCategoryColors();
     });
 } else {
+    renderRefaccionariaProducts();
     filterCategory('all');
     updateCartUI();
     initializeProductViewer();
@@ -543,16 +634,6 @@ if (document.readyState === 'loading') {
     initCookieBanner();
     addPriceBadges();
     applyCategoryColors();
-}
-
-// Registro del service worker — necesario para que el navegador
-// considere la página "instalable" como app (PWA).
-if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-        navigator.serviceWorker.register('./sw.js').catch((err) => {
-            console.error('No se pudo registrar el service worker:', err);
-        });
-    });
 }
 
 // ========================================

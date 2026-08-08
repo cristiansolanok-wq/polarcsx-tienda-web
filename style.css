@@ -181,17 +181,26 @@ body {
 .product-img {
     max-width: 100%;
     height: auto;
-    border-radius: 8px; /* Le da bordes redondeados aesthetic */
+    border-radius: 8px;
     display: block;
-    margin: 0 auto; /* La centra perfectamente */
-    object-fit: cover;
+    margin: 0 auto;
+    object-fit: contain;
 }
 
 .price {
-    /* El precio ya se muestra en el badge sobre la imagen (arriba).
-       Este texto se queda oculto en el DOM porque el JS lo sigue
-       leyendo para armar el visor — quitarlo del HTML rompería eso. */
-    display: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    margin-top: 8px;
+    color: #ccd6f6;
+    font-size: 0.95rem;
+    font-weight: 700;
+}
+
+.price::before {
+    content: "Precio";
+    font-size: 0.8rem;
+    color: #8ca6ff;
 }
 
 .expand-icon {
@@ -1095,13 +1104,19 @@ CARRITO MODAL - OVERLAY STYLE
 }
 
 .viewer-hint {
-    margin-top: 16px;
-    padding-top: 16px;
-    border-top: 1px solid rgba(255, 255, 255, 0.05);
-    color: rgba(255, 255, 255, 0.5);
-    font-size: 0.85rem;
-    line-height: 1.6;
-    text-align: center;
+    margin: 0;
+    color: rgba(255,255,255,0.6);
+    font-size: 0.95rem;
+    padding-top: 8px;
+}
+
+.viewer-hint.top {
+    margin: 0 0 18px;
+    padding: 0;
+    border-top: none;
+    text-align: left;
+    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.75);
 }
 
 /* RESPONSIVE DESIGN */
@@ -1188,13 +1203,6 @@ CARRITO MODAL - OVERLAY STYLE
 .viewer-buy-btn:hover {
     transform: translateY(-1px);
     filter: brightness(1.05);
-}
-
-.viewer-hint {
-    margin: 0;
-    color: rgba(255,255,255,0.6);
-    font-size: 0.95rem;
-    padding-top: 8px;
 }
 
 @media (max-width: 860px) {
@@ -1288,21 +1296,126 @@ filter:brightness(1.15);
     align-items: start; 
 }
 
-/* 1. Tarjeta vertical (estilo Temu/Mercado Libre) */
-.product-card {
-    display: flex;
-    flex-direction: column;
-    background-color: #1a1a1a;
-    border-radius: 12px;
-    border: 1px solid #333;
-    overflow: hidden;
-    transition: border-color 0.3s ease, transform 0.2s ease;
-}
+    .section-title {
+        grid-column: 1 / -1;
+        background: rgba(255,255,255,0.04);
+        border: 1px solid rgba(255,255,255,0.08);
+        border-radius: 18px;
+        padding: 24px 28px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 20px;
+        margin-bottom: 0;
+    }
+
+    .section-title-text h2 {
+        margin: 0 0 8px;
+        font-size: 1.5rem;
+        color: #f8f9ff;
+    }
+
+    .section-title-text p {
+        margin: 0;
+        color: #cbd5e1;
+        max-width: 720px;
+        line-height: 1.6;
+    }
+
+    .product-image-container.placeholder {
+        background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
+        display: grid;
+        place-items: center;
+        color: #8b98b9;
+        font-size: 0.95rem;
+        min-height: 220px;
+    }
+
+    .product-image-container.placeholder span {
+        text-transform: uppercase;
+        letter-spacing: 0.15em;
+    }
+
+    .ubicacion-seccion {
+        max-width: 1200px;
+        margin: 30px auto;
+        padding: 0 20px;
+    }
+
+    .ubicacion-card {
+        background: #121212;
+        border: 1px solid rgba(255,255,255,0.08);
+        border-radius: 24px;
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 24px;
+        padding: 28px;
+        align-items: center;
+    }
+
+    .ubicacion-texto h2 {
+        margin: 0 0 12px;
+        font-size: 1.85rem;
+        color: #fff;
+    }
+
+    .ubicacion-texto p {
+        margin: 0 0 16px;
+        color: #cbd5e1;
+        line-height: 1.7;
+        max-width: 720px;
+    }
+
+    .ubicacion-texto ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: grid;
+        gap: 10px;
+    }
+
+    .ubicacion-texto li {
+        color: #e5e7eb;
+        font-size: 0.98rem;
+    }
+
+    .ubicacion-hint {
+        margin-top: 14px;
+        display: inline-block;
+        color: #9ca3af;
+        font-size: 0.9rem;
+    }
+
+    .ubicacion-badge {
+        display: inline-flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        background: #181818;
+        border-radius: 22px;
+        padding: 22px 24px;
+        min-width: 220px;
+        text-align: center;
+        color: #fff;
+    }
+
+    .ubicacion-badge i {
+        font-size: 2.4rem;
+        color: #c5a059;
+    }
+
+    .ubicacion-badge span {
+        font-size: 1rem;
+        letter-spacing: 0.04em;
+        color: #d1d5db;
+        text-transform: uppercase;
+    }
 
 .product-card:hover {
     border-color: #c5a059;
-    transform: translateY(-5px); /* Pequeño salto al pasar el mouse */
-    box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+    transform: translateY(-4px);
+    box-shadow: 0 14px 40px rgba(0,0,0,0.35);
 }
 
 /* 2. Resumen ahora es vertical */
