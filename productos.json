@@ -1,0 +1,312 @@
+[
+  {
+    "id": "tecnologia-autoestereo-xbtod",
+    "category": "accesorios",
+    "title": "Autoestéreo Bluetooth XbTod",
+    "subtitle": "FM / USB / SD / MP3 · 60W x4",
+    "price": "$420.00 MXN*",
+    "imageSrc": "img/autoestereo-xbtod-bluetooth.jpg",
+    "description": "Autoestéreo 1DIN con Bluetooth, USB frontal, lector SD/MMC, radio FM y salida RCA. 60W x4 canales. Varios modelos disponibles (1781, 1782, 1783, 1785).",
+    "note": "* Precio estimado, incluye margen de venta local. El costo final se confirma por WhatsApp."
+  },
+  {
+    "id": "tecnologia-cargador-gan-1hora",
+    "category": "accesorios",
+    "title": "Cargador GaN 30W Tipo-C — 1Hora",
+    "subtitle": "Carga rápida, puerto Tipo-C",
+    "price": "$290.00 MXN*",
+    "imageSrc": "img/gan30tipoc.jpg",
+    "description": "El Cargador GaN 30W Tipo-C de 1Hora ofrece carga rápida, eficiente y segura gracias a la tecnología GaN, que permite mayor potencia en un diseño compacto.\n\n\n\nCaracterísticas:\n• Tecnología GaN de alta eficiencia.\n• Potencia de hasta 30W.\n• Puerto USB Tipo-C.\n• Diseño compacto y ligero.\n• Protección contra sobrecarga y sobrecalentamiento.\n• Compatible con smartphones, tablets y otros dispositivos USB-C.\n\n\n\nIdeal para:\n• Android.\n• iPhone (con cable USB-C a Lightning).\n• Tablets.\n• Audífonos inalámbricos.\n• Power Banks.\n\n\n\nDisfruta de una carga rápida, segura y confiable en casa, oficina o durante tus viajes.",
+    "note": "* Precio estimado, incluye margen de venta local. El costo final se confirma por WhatsApp."
+  },
+  {
+    "id": "tecnologia-bocina-fol-238",
+    "category": "accesorios",
+    "title": "Bocina Multimedia FOL 2.1 Canales",
+    "subtitle": "FM / Bluetooth / USB / SD",
+    "price": "$850.00 MXN*",
+    "imageSrc": "img/bocina-fol-fsp238.jpg",
+    "description": "Sistema de bocinas 2.1 canales con Bluetooth, radio FM, entrada USB y tarjeta SD. Incluye control remoto.",
+    "note": "* Precio estimado, incluye margen de venta local. El costo final se confirma por WhatsApp."
+  },
+  {
+    "id": "tecnologia-bocina-fol-241",
+    "category": "accesorios",
+    "title": "Bocina Multimedia FOL 2.1 (FS-P241)",
+    "subtitle": "FM / Bluetooth / USB / SD",
+    "price": "$900.00 MXN*",
+    "imageSrc": "img/bocina-fol-fps241.jpg",
+    "description": "Sistema de bocinas 2.1 canales, modelo FS-P241, con Bluetooth, radio FM, USB, SD y control remoto incluido.",
+    "note": "* Precio estimado, incluye margen de venta local. El costo final se confirma por WhatsApp."
+  },
+  {
+    "id": "tecnologia-bocina-ridgeway",
+    "category": "accesorios",
+    "title": "Bocina/Megáfono Ridgeway con Micrófono de Diadema",
+    "subtitle": "BT / FM / MIC / Memory Card / AUX",
+    "price": "$220.00 MXN*",
+    "imageSrc": "img/bocina-megafono-ridgeway.jpg",
+    "description": "Bocina portátil con micrófono de diadema, ideal para maestros y locutores. Bluetooth, radio FM, entrada de memoria y auxiliar.",
+    "note": "* Precio estimado, incluye margen de venta local. El costo final se confirma por WhatsApp."
+  },
+  {
+    "id": "tecnologia-teclado-kaiping",
+    "category": "accesorios",
+    "title": "Teclado Mini Multimedia KaiPing",
+    "subtitle": "USB · Plug & Play · 18 teclas de acceso rápido",
+    "price": "$315.00 MXN*",
+    "imageSrc": "img/teclado-mini-kaiping.jpg",
+    "description": "Teclado mini multimedia ultra delgado, conexión USB plug & play, 18 teclas de acceso rápido y diseño resistente a derrames.",
+    "note": "* Precio estimado, incluye margen de venta local. El costo final se confirma por WhatsApp."
+  },
+  {
+    "id": "tecnologia-funda-iphone13-promax-morada",
+    "category": "accesorios",
+    "title": "Funda iPhone 13 Pro Max MagSafe — Morada",
+    "subtitle": "Smart Case + Mica de protección",
+    "price": "$310.00 MXN*",
+    "imageSrc": "img/fundamorada.jpg",
+    "description": "Kit funda tipo Smart Case con imanes MagSafe integrados, acabado morado, más mica de protección de pantalla. Compatible con iPhone 13 Pro Max.",
+    "note": "* Precio estimado, incluye margen de venta local. El costo final se confirma por WhatsApp."
+  },
+  {
+    "id": "tecnologia-funda-iphone12-magsafe",
+    "category": "accesorios",
+    "title": "Funda iPhone 12 MagSafe + Mica 9D",
+    "subtitle": "Kit funda con imanes + mica de vidrio 9D",
+    "price": "$290.00 MXN*",
+    "imageSrc": "img/fundatransparente.jpg",
+    "description": "Kit funda con imanes MagSafe integrados más mica de vidrio templado 9D borde a borde. Compatible con iPhone 12.",
+    "note": "* Precio estimado, incluye margen de venta local. El costo final se confirma por WhatsApp."
+  },
+  {
+    "id": "tecnologia-funda-piel-magsafe",
+    "category": "accesorios",
+    "title": "Funda Piel MagSafe + Mica 9D",
+    "subtitle": "Kit funda tipo piel con imanes + mica de vidrio 9D",
+    "price": "$290.00 MXN*",
+    "imageSrc": "img/fundacafe.jpg",
+    "description": "Kit funda tipo piel con imanes MagSafe integrados más mica de vidrio templado 9D borde a borde. Confírmanos tu modelo de iPhone por WhatsApp.",
+    "note": "* Precio estimado, incluye margen de venta local. El costo final se confirma por WhatsApp."
+  },
+  {
+    "id": "tecnologia-funda-fibra-carbono",
+    "category": "accesorios",
+    "title": "Funda Fibra de Carbono + Mica 9D",
+    "subtitle": "Kit funda texturizada + mica de vidrio 9D",
+    "price": "$250.00 MXN*",
+    "imageSrc": "img/fundaiphonegris.jpg",
+    "description": "Kit funda texturizada estilo fibra de carbono, agarre antideslizante, más mica de vidrio templado 9D borde a borde. Confírmanos tu modelo de iPhone por WhatsApp.",
+    "note": "* Precio estimado, incluye margen de venta local. El costo final se confirma por WhatsApp."
+  },
+  {
+    "id": "tecnologia-cargador-1hora-gar124",
+    "category": "accesorios",
+    "title": "Cargador 1Hora GAR124 + Cable Micro USB",
+    "subtitle": "Cubo 2.4A / 12W + cable Micro USB 1M",
+    "price": "$110.00 MXN*",
+    "imageSrc": "img/cargadorv8.jpg",
+    "description": "Combo cargador de pared 2.4A (12W máx.) más cable Micro USB de 1 metro. Compacto y listo para usarse.",
+    "note": "* Precio estimado, incluye margen de venta local. El costo final se confirma por WhatsApp."
+  },
+  {
+    "id": "tecnologia-mouse-young",
+    "category": "accesorios",
+    "title": "Mouse Inalámbrico Plegable YOUNG",
+    "subtitle": "Diseño plegable, conexión inalámbrica",
+    "price": "$160.00 MXN*",
+    "imageSrc": "img/mouseyoung.jpg",
+    "description": "Mouse inalámbrico plegable, ligero y portátil, ideal para laptop. Se pliega para guardarse fácilmente.",
+    "note": "* Precio estimado, incluye margen de venta local. El costo final se confirma por WhatsApp."
+  },
+  {
+    "id": "tecnologia-cable-vga-5m",
+    "category": "accesorios",
+    "title": "Cable VGA a VGA — 5 Metros",
+    "subtitle": "Conector macho-macho, blindado",
+    "price": "$120.00 MXN*",
+    "imageSrc": "img/cable-vga-5m.jpg",
+    "description": "Cable VGA de 5 metros, conectores macho-macho, ideal para monitores, proyectores y equipos de cómputo.",
+    "note": "* Precio estimado, incluye margen de venta local. El costo final se confirma por WhatsApp."
+  },
+  {
+    "id": "4life-belle-vie",
+    "category": "4life",
+    "title": "4Life Belle Vie",
+    "subtitle": "Salud femenina",
+    "price": "$1,121.00 MXN*",
+    "imageSrc": "img/bellevie.jpeg",
+    "description": "¿Para qué sirve?\n            Suplemento alimenticio diseñado para complementar la nutrición diaria femenina, aportando ingredientes seleccionados que contribuyen al bienestar integral como parte de un estilo de vida saludable.\n\n\n            Puntos clave de bienestar:\n\n            \n                • Complementa la nutrición enfocada en el bienestar femenino.\n                • Brinda respaldo nutricional para una rutina diaria equilibrada.\n                • Contribuye al cuidado integral del organismo.\n                • Apoya hábitos saludables durante diferentes etapas de la vida femenina.\n                • Favorece una rutina enfocada en equilibrio y bienestar general.\n                • Ideal para complementar una alimentación balanceada.\n                • Diseñado para mujeres que buscan cuidar su bienestar diariamente.\n            \n\n\n            * Nota: El precio mostrado es de referencia. El costo final puede variar ligeramente dependiendo de tu región o zona de envío. ¡Te confirmamos el total al momento de tu pedido!\n\n\n            \n\n                ★★★★★ \n                (4.9 de 5)",
+    "note": "* Nota: El precio mostrado es de referencia. El costo final puede variar ligeramente dependiendo de tu región o zona de envío. ¡Te confirmamos el total al momento de tu pedido!"
+  },
+  {
+    "id": "4life-transfer-factor-plus",
+    "category": "4life",
+    "title": "4Life Transfer Factor Plus",
+    "subtitle": "Sistema inmunológico",
+    "price": "$1,339.00 MXN*",
+    "imageSrc": "img/4life.jpeg",
+    "description": "¿Para qué sirve?\n            Suplemento alimenticio diseñado para complementar la nutrición diaria y brindar respaldo al sistema inmunológico como parte de un estilo de vida saludable y equilibrado.\n\n\n            Puntos clave de bienestar:\n\n            \n                • Brinda apoyo nutricional para el funcionamiento natural del sistema inmunológico.\n                • Complementa una alimentación enfocada en el bienestar integral.\n                • Ayuda a mantener una rutina de cuidado y prevención diaria.\n                • Aporta respaldo nutricional para personas con estilos de vida activos.\n                • Contribuye al equilibrio general del organismo.\n                • Ideal como complemento dentro de hábitos saludables.\n                • Producto diseñado para acompañar una rutina diaria de bienestar.\n            \n\n\n            * Nota: El precio mostrado es de referencia. El costo final puede variar ligeramente dependiendo de tu región o zona de envío. ¡Te confirmamos el total al momento de tu pedido!\n\n\n            \n\n                ★★★★★ \n                (4.9 de 5)",
+    "note": "* Nota: El precio mostrado es de referencia. El costo final puede variar ligeramente dependiendo de tu región o zona de envío. ¡Te confirmamos el total al momento de tu pedido!"
+  },
+  {
+    "id": "4life-gold-factor",
+    "category": "4life",
+    "title": "4Life Gold Factor",
+    "subtitle": "Sistema inmunológico",
+    "price": "$1,359.00 MXN*",
+    "imageSrc": "img/gold.jpeg",
+    "description": "¿Para qué sirve?\n            Suplemento alimenticio diseñado para complementar la nutrición diaria y brindar respaldo al bienestar integral del organismo, como parte de una rutina enfocada en salud y equilibrio.\n\n\n            Puntos clave de bienestar:\n\n            \n                • Complementa una alimentación equilibrada con nutrientes seleccionados.\n                • Brinda respaldo nutricional para el bienestar general.\n                • Apoya una rutina diaria enfocada en el cuidado del organismo.\n                • Contribuye al mantenimiento de hábitos saludables.\n                • Ideal para personas que buscan complementar su nutrición.\n                • Favorece una rutina de bienestar integral y equilibrio diario.\n                • Producto práctico para incorporar al estilo de vida actual.\n            \n\n\n            * Nota: El precio mostrado es de referencia. El costo final puede variar ligeramente dependiendo de tu región o zona de envío. ¡Te confirmamos el total al momento de tu pedido!\n\n\n            \n\n                ★★★★★ \n                (4.9 de 5)",
+    "note": "* Nota: El precio mostrado es de referencia. El costo final puede variar ligeramente dependiendo de tu región o zona de envío. ¡Te confirmamos el total al momento de tu pedido!"
+  },
+  {
+    "id": "4life-colageno",
+    "category": "4life",
+    "title": "4Life Colágeno",
+    "subtitle": "Belleza y bienestar",
+    "price": "$863.00 MXN*",
+    "imageSrc": "img/colageno.jpg",
+    "description": "¿Para qué sirve?\n            Suplemento alimenticio con colágeno diseñado para complementar la nutrición diaria y apoyar una rutina enfocada en bienestar, belleza y cuidado personal.\n\n\n            Puntos clave de bienestar:\n\n            \n                • Complementa la nutrición diaria con ingredientes seleccionados.\n                • Ideal para rutinas enfocadas en cuidado personal.\n                • Brinda respaldo nutricional dentro de un estilo de vida saludable.\n                • Fácil de integrar a la rutina diaria.\n                • Apoya hábitos relacionados con bienestar y cuidado integral.\n                • Presentación práctica para mayor comodidad.\n                • Excelente complemento para una alimentación equilibrada.\n            \n\n\n            * Nota: El precio mostrado es de referencia. El costo final puede variar ligeramente dependiendo de tu región o zona de envío. ¡Te confirmamos el total al momento de tu pedido!\n\n\n            \n\n                ★★★★★ (4.9 de 5)",
+    "note": "* Nota: El precio mostrado es de referencia. El costo final puede variar ligeramente dependiendo de tu región o zona de envío. ¡Te confirmamos el total al momento de tu pedido!"
+  },
+  {
+    "id": "4life-vistari",
+    "category": "4life",
+    "title": "4Life Vistari",
+    "subtitle": "Bienestar integral",
+    "price": "$1,206.00 MXN*",
+    "imageSrc": "img/vistari.jpg",
+    "description": "¿Para qué sirve?\n            Suplemento alimenticio diseñado para complementar la nutrición diaria y brindar respaldo al bienestar general del organismo como parte de un estilo de vida equilibrado.\n\n\n            Puntos clave de bienestar:\n\n            \n                • Complementa la alimentación diaria con ingredientes seleccionados.\n                • Brinda apoyo nutricional para el bienestar integral.\n                • Favorece una rutina enfocada en equilibrio y vitalidad.\n                • Contribuye al mantenimiento de hábitos saludables.\n                • Ideal para complementar un estilo de vida activo.\n                • Presentación práctica para incorporarse fácilmente a la rutina diaria.\n                • Diseñado para acompañar una alimentación balanceada.\n            \n\n\n            * Nota: El precio mostrado es de referencia. El costo final puede variar ligeramente dependiendo de tu región o zona de envío. ¡Te confirmamos el total al momento de tu pedido!\n\n\n            \n\n                ★★★★★ \n                (4.8 de 5)",
+    "note": "* Nota: El precio mostrado es de referencia. El costo final puede variar ligeramente dependiendo de tu región o zona de envío. ¡Te confirmamos el total al momento de tu pedido!"
+  },
+  {
+    "id": "4life-tfbcv-trifactor-formula",
+    "category": "4life",
+    "title": "4Life TFBCV Trifactor Fórmula",
+    "subtitle": "Bienestar cardiovascular",
+    "price": "$1,365.00 MXN*",
+    "imageSrc": "img/bcv.jpg",
+    "description": "¿Para qué sirve?\n            Fórmula nutricional diseñada para complementar el bienestar cardiovascular, aportando ingredientes seleccionados que ayudan a mantener una alimentación equilibrada y apoyar el cuidado integral del organismo.\n\n            Puntos clave de bienestar:\n\n            \n                • Complementa una rutina enfocada en el cuidado cardiovascular.\n                • Apoya el mantenimiento de una circulación saludable como parte de hábitos equilibrados.\n                • Brinda respaldo nutricional para el bienestar general del organismo.\n                • Contribuye al equilibrio de nutrientes importantes dentro de una alimentación completa.\n                • Ideal para personas que buscan fortalecer sus hábitos de bienestar diario.\n                • Favorece un estilo de vida activo acompañado de una correcta nutrición.\n                • Fórmula diseñada para complementar el cuidado integral del cuerpo.\n            \n\n            * Nota: El precio mostrado es de referencia. El costo final puede variar ligeramente dependiendo de tu región o zona de envío. ¡Te confirmamos el total al momento de tu pedido!\n\n            \n                ★★★★★ (4.9 de 5)",
+    "note": "* Nota: El precio mostrado es de referencia. El costo final puede variar ligeramente dependiendo de tu región o zona de envío. ¡Te confirmamos el total al momento de tu pedido!"
+  },
+  {
+    "id": "4life-glutamine-prime",
+    "category": "4life",
+    "title": "4Life Glutamine Prime",
+    "subtitle": "Rendimiento y recuperación",
+    "price": "$774.00 MXN*",
+    "imageSrc": "img/glutamine-prime.jpg",
+    "description": "¿Para qué sirve?\n            Suplemento nutricional con glutamina diseñado para complementar la alimentación de personas con un estilo de vida activo, brindando respaldo nutricional dentro de una rutina enfocada en bienestar y rendimiento.\n\n            Puntos clave de bienestar:\n\n            \n                • Aporta glutamina como complemento de la nutrición diaria.\n                • Ideal para acompañar rutinas de actividad física y desgaste energético.\n                • Brinda apoyo nutricional dentro de procesos de recuperación corporal.\n                • Complementa una alimentación equilibrada enfocada en el bienestar.\n                • Favorece una rutina activa con respaldo nutricional adecuado.\n                • Presentación práctica para incorporarse fácilmente al día a día.\n                • Diseñado para personas que buscan complementar su rendimiento personal.\n            \n\n            * Nota: El precio mostrado es de referencia. El costo final puede variar ligeramente dependiendo de tu región o zona de envío. ¡Te confirmamos el total al momento de tu pedido!\n\n            \n                ★★★★★ (4.8 de 5)",
+    "note": "* Nota: El precio mostrado es de referencia. El costo final puede variar ligeramente dependiendo de tu región o zona de envío. ¡Te confirmamos el total al momento de tu pedido!"
+  },
+  {
+    "id": "4life-tfa-g-pro",
+    "category": "4life",
+    "title": "4Life TFA G-Pro",
+    "subtitle": "Bienestar muscular",
+    "price": "$1,314.00 MXN*",
+    "imageSrc": "img/agepro.jpg",
+    "description": "¿Para qué sirve?\n            Fórmula nutricional diseñada para complementar la alimentación diaria y brindar respaldo al bienestar muscular y físico, especialmente dentro de rutinas activas y estilos de vida exigentes.\n\n            Puntos clave de bienestar:\n\n            \n                • Complementa la nutrición de personas con actividad física constante.\n                • Aporta respaldo nutricional para mantener un estilo de vida activo.\n                • Ideal como complemento dentro de rutinas enfocadas en rendimiento físico.\n                • Favorece hábitos saludables relacionados con bienestar corporal.\n                • Brinda apoyo nutricional para etapas de mayor demanda física.\n                • Fórmula práctica para integrarse a la rutina diaria.\n                • Diseñado para quienes buscan complementar su alimentación deportiva.\n            \n\n            * Nota: El precio mostrado es de referencia. El costo final puede variar ligeramente dependiendo de tu región o zona de envío. ¡Te confirmamos el total al momento de tu pedido!\n\n            \n                ★★★★★ (4.8 de 5)",
+    "note": "* Nota: El precio mostrado es de referencia. El costo final puede variar ligeramente dependiendo de tu región o zona de envío. ¡Te confirmamos el total al momento de tu pedido!"
+  },
+  {
+    "id": "4life-prezoom",
+    "category": "4life",
+    "title": "4Life Prezoom",
+    "subtitle": "Nutrición y bienestar",
+    "price": "$1,271.00 MXN*",
+    "imageSrc": "img/prezoom.jpg",
+    "description": "¿Para qué sirve?\n            Fórmula nutricional diseñada para complementar la alimentación diaria mediante una combinación de ingredientes seleccionados que aportan respaldo al bienestar general y a un estilo de vida saludable.\n\n            Puntos clave de bienestar:\n\n            \n                • Complementa la nutrición diaria con ingredientes cuidadosamente seleccionados.\n                • Apoya una rutina enfocada en bienestar y equilibrio personal.\n                • Brinda respaldo nutricional para acompañar un estilo de vida activo.\n                • Favorece hábitos saludables como parte de una alimentación completa.\n                • Ideal para quienes buscan fortalecer su rutina de cuidado personal.\n                • Presentación práctica para integrarse fácilmente al consumo diario.\n                • Diseñado para complementar diferentes estilos de vida y necesidades nutricionales.\n            \n\n            * Nota: El precio mostrado es de referencia. El costo final puede variar ligeramente dependiendo de tu región o zona de envío. ¡Te confirmamos el total al momento de tu pedido!\n\n            \n                ★★★★★ (4.9 de 5)",
+    "note": "* Nota: El precio mostrado es de referencia. El costo final puede variar ligeramente dependiendo de tu región o zona de envío. ¡Te confirmamos el total al momento de tu pedido!"
+  },
+  {
+    "id": "4life-nutrastart",
+    "category": "4life",
+    "title": "4Life NutraStart",
+    "subtitle": "Nutrición diaria",
+    "price": "$1,472 MXN*",
+    "imageSrc": "img/nutrastart.jpg",
+    "description": "¿Para qué sirve?\n            Suplemento alimenticio con vitaminas, minerales y Transfer Factor®, diseñado para complementar la alimentación diaria y apoyar el bienestar general, la vitalidad y el funcionamiento normal del sistema inmunológico.\n\n            Puntos clave de bienestar:\n\n            \n                • Complementa la alimentación con vitaminas y minerales esenciales.\n                • Apoya el funcionamiento normal del sistema inmunológico.\n                • Favorece la producción natural de energía a partir de los nutrientes.\n                • Contribuye al bienestar físico durante actividades cotidianas.\n                • Ayuda a mantener un adecuado equilibrio nutricional.\n                • Ideal para personas con un estilo de vida activo o de alta demanda.\n                • Excelente complemento dentro de una alimentación equilibrada y hábitos saludables.\n            \n\n            * Nota: El precio mostrado es de referencia. El costo final puede variar ligeramente dependiendo de tu región o zona de envío. ¡Te confirmamos el total al momento de tu pedido!\n\n            \n                ★★★★★ (4.9 de 5)",
+    "note": "* Nota: El precio mostrado es de referencia. El costo final puede variar ligeramente dependiendo de tu región o zona de envío. ¡Te confirmamos el total al momento de tu pedido!"
+  },
+  {
+    "id": "4life-renuvo",
+    "category": "4life",
+    "title": "4Life Renuvo",
+    "subtitle": "Energía y vitalidad",
+    "price": "$1,180.00 MXN*",
+    "imageSrc": "img/renuvo.jpg",
+    "description": "¿Para qué sirve?\n            Suplemento alimenticio diseñado para complementar la nutrición diaria y brindar respaldo al bienestar general del organismo, ayudando a mantener vitalidad y equilibrio como parte de un estilo de vida saludable.\n\n            Puntos clave de bienestar:\n\n            \n                • Complementa una rutina enfocada en energía y bienestar integral.\n                • Brinda respaldo nutricional para el cuidado del organismo.\n                • Favorece la vitalidad y el rendimiento diario.\n                • Apoya una alimentación equilibrada con nutrientes seleccionados.\n                • Ideal para personas con rutinas activas y exigentes.\n                • Contribuye al bienestar físico y mental dentro de hábitos saludables.\n                • Diseñado para acompañar un estilo de vida dinámico.\n            \n\n            * Nota: El precio mostrado es de referencia. El costo final puede variar ligeramente dependiendo de tu región o zona de envío. ¡Te confirmamos el total al momento de tu pedido!\n\n            \n                ★★★★★ (4.9 de 5)",
+    "note": "* Nota: El precio mostrado es de referencia. El costo final puede variar ligeramente dependiendo de tu región o zona de envío. ¡Te confirmamos el total al momento de tu pedido!"
+  },
+  {
+    "id": "4life-rio-vida",
+    "category": "4life",
+    "title": "4Life Ríovida",
+    "subtitle": "Sistema inmunológico",
+    "price": "$712.00 MXN*",
+    "imageSrc": "img/riovida.jpeg",
+    "description": "¿Para qué sirve?\n            Bebida nutricional diseñada para complementar la alimentación diaria y brindar respaldo al bienestar general del organismo, combinando ingredientes seleccionados como parte de un estilo de vida saludable.\n\n            Puntos clave de bienestar:\n\n            \n                • Complementa la nutrición diaria con ingredientes seleccionados.\n                • Brinda respaldo al bienestar general del organismo.\n                • Apoya una rutina enfocada en vitalidad y equilibrio.\n                • Favorece hábitos saludables como parte de una alimentación completa.\n                • Presentación práctica para integrarse fácilmente a la rutina diaria.\n                • Ideal para personas que buscan complementar su bienestar.\n                • Excelente opción dentro de un estilo de vida activo y saludable.\n            \n\n            * Nota: El precio mostrado es de referencia. El costo final puede variar ligeramente dependiendo de tu región o zona de envío. ¡Te confirmamos el total al momento de tu pedido!\n\n            \n                ★★★★★ (4.9 de 5)",
+    "note": "* Nota: El precio mostrado es de referencia. El costo final puede variar ligeramente dependiendo de tu región o zona de envío. ¡Te confirmamos el total al momento de tu pedido!"
+  },
+  {
+    "id": "hogar-manguera-neon-rosa",
+    "category": "hogar-extras",
+    "title": "Manguera Neón LED RGB — Rosa",
+    "subtitle": "5 metros · 12V · Incluye fuente de poder",
+    "price": "$480.00 MXN*",
+    "imageSrc": "img/manguera-neon-rgb-rosa.jpg",
+    "description": "Tira de luz neón flexible RGB color rosa, 5 metros, 12V. Incluye fuente de poder. Ideal para decoración de negocios, cuartos y exteriores.",
+    "note": "* Precio estimado, incluye margen de venta local. El costo final se confirma por WhatsApp."
+  },
+  {
+    "id": "servicio-plomeria",
+    "category": "servicios",
+    "title": "Servicio de Plomería",
+    "subtitle": "",
+    "price": "",
+    "imageSrc": "",
+    "description": "Reparación e instalación de tuberías, fugas y accesorios de baño y cocina.",
+    "note": ""
+  },
+  {
+    "id": "servicio-herreria",
+    "category": "servicios",
+    "title": "Servicio de Herrería",
+    "subtitle": "",
+    "price": "",
+    "imageSrc": "",
+    "description": "Fabricación y reparación de portones, rejas y estructuras metálicas a medida.",
+    "note": ""
+  },
+  {
+    "id": "servicio-albanileria",
+    "category": "servicios",
+    "title": "Servicio de Albañilería",
+    "subtitle": "",
+    "price": "",
+    "imageSrc": "",
+    "description": "Construcción, remodelación y reparaciones generales de albañilería.",
+    "note": ""
+  },
+  {
+    "id": "servicio-aluminieria",
+    "category": "servicios",
+    "title": "Servicio de Aluminería",
+    "subtitle": "",
+    "price": "",
+    "imageSrc": "",
+    "description": "Fabricación e instalación de ventanas, puertas y cancelería de aluminio.",
+    "note": ""
+  },
+  {
+    "id": "servicio-vidrieria",
+    "category": "servicios",
+    "title": "Servicio de Vidriería",
+    "subtitle": "",
+    "price": "",
+    "imageSrc": "",
+    "description": "Corte, instalación y reposición de vidrios para ventanas, puertas y muebles.",
+    "note": ""
+  }
+]

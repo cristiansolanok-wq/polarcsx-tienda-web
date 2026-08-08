@@ -88,6 +88,293 @@ function applyCategoryColors() {
     });
 }
 
+let productsCatalog = [];
+
+function escapeHtml(value) {
+    return String(value || '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+}
+
+function escapeJsString(value) {
+    return String(value || '')
+        .replace(/\\/g, '\\\\')
+        .replace(/'/g, "\\'")
+        .replace(/\n/g, ' ')
+        .replace(/\r/g, ' ');
+}
+
+const AUTH_USERS_KEY = 'polarcsx_users';
+const AUTH_ACTIVE_USER_KEY = 'polarcsx_active_user';
+
+function getStoredUsers() {
+    try {
+        return JSON.parse(localStorage.getItem(AUTH_USERS_KEY)) || [];
+    } catch (error) {
+        return [];
+    }
+}
+
+function saveStoredUsers(users) {
+    localStorage.setItem(AUTH_USERS_KEY, JSON.stringify(users));
+}
+
+function getActiveUser() {
+    try {
+        return JSON.parse(localStorage.getItem(AUTH_ACTIVE_USER_KEY));
+    } catch (error) {
+        return null;
+    }
+}
+
+function saveActiveUser(user) {
+    localStorage.setItem(AUTH_ACTIVE_USER_KEY, JSON.stringify(user));
+}
+
+function clearActiveUser() {
+    localStorage.removeItem(AUTH_ACTIVE_USER_KEY);
+}
+
+function showAuthMessage(message, type = 'error') {
+    const messageBox = document.getElementById('auth-message');
+    if (!messageBox) return;
+    messageBox.textContent = message;
+    messageBox.className = `auth-message ${type}`;
+}
+
+function setAuthMode(mode) {
+    const tabs = document.querySelectorAll('.auth-tab');
+    const nameGroup = document.getElementById('auth-name-group');
+    const submitBtn = document.getElementById('auth-submit-btn');
+    const title = document.getElementById('auth-modal-title');
+
+    tabs.forEach(tab => {
+        tab.classList.toggle('active', tab.dataset.mode === mode);
+    });
+
+    if (nameGroup) {
+        nameGroup.style.display = mode === 'register' ? 'flex' : 'none';
+    }
+
+    if (submitBtn) {
+        submitBtn.textContent = mode === 'register' ? 'Crear cuenta' : 'Entrar';
+    }
+
+    if (title) {
+        title.textContent = mode === 'register' ? 'Crear tu cuenta' : 'Iniciar sesión';
+    }
+
+    showAuthMessage('');
+}
+
+function openAuthModal(mode = 'login') {
+    const modal = document.getElementById('auth-modal');
+    if (!modal) return;
+
+    modal.classList.add('open');
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    setAuthMode(mode);
+}
+
+function closeAuthModal() {
+    const modal = document.getElementById('auth-modal');
+    if (!modal) return;
+
+    modal.classList.remove('open');
+    modal.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+}
+
+function updateAuthUI() {
+    const authBtn = document.getElementById('auth-btn');
+    const logoutBtn = document.getElementById('auth-logout-btn');
+    const activeUser = getActiveUser();
+
+    if (authBtn) {
+        authBtn.innerHTML = '<i class="fa-solid fa-user"></i><span id="auth-btn-label"></span>';
+    }
+
+    const btnLabel = document.getElementById('auth-btn-label');
+    if (btnLabel) {
+        btnLabel.textContent = activeUser ? `Hola, ${activeUser.name.split(' ')[0]}` : 'Iniciar sesión';
+    }
+
+    if (logoutBtn) {
+        logoutBtn.style.display = activeUser ? 'inline-flex' : 'none';
+    }
+}
+
+function logoutUser() {
+    clearActiveUser();
+    updateAuthUI();
+    closeAuthModal();
+    showAuthMessage('Sesión cerrada correctamente.', 'success');
+}
+
+function handleAuthFormSubmit(event) {
+    event.preventDefault();
+
+    const mode = document.querySelector('.auth-tab.active')?.dataset.mode || 'login';
+    const nameInput = document.getElementById('auth-name');
+    const emailInput = document.getElementById('auth-email');
+    const passwordInput = document.getElementById('auth-password');
+
+    const name = nameInput ? nameInput.value.trim() : '';
+    const email = emailInput ? emailInput.value.trim().toLowerCase() : '';
+    const password = passwordInput ? passwordInput.value : '';
+
+    if (!email || !password) {
+        showAuthMessage('Completa el correo y la contraseña.', 'error');
+        return;
+    }
+
+    if (mode === 'register') {
+        if (!name) {
+            showAuthMessage('Agrega tu nombre para crear la cuenta.', 'error');
+            return;
+        }
+
+        if (password.length < 6) {
+            showAuthMessage('La contraseña debe tener al menos 6 caracteres.', 'error');
+            return;
+        }
+
+        const users = getStoredUsers();
+        if (users.some(user => user.email === email)) {
+            showAuthMessage('Ese correo ya está registrado.', 'error');
+            return;
+        }
+
+        const newUser = { name, email, password };
+        users.push(newUser);
+        saveStoredUsers(users);
+        saveActiveUser(newUser);
+        updateAuthUI();
+        closeAuthModal();
+        showAuthMessage('Cuenta creada correctamente.', 'success');
+        return;
+    }
+
+    const users = getStoredUsers();
+    const matchedUser = users.find(user => user.email === email && user.password === password);
+
+    if (!matchedUser) {
+        showAuthMessage('Correo o contraseña incorrectos.', 'error');
+        return;
+    }
+
+    saveActiveUser(matchedUser);
+    updateAuthUI();
+    closeAuthModal();
+    showAuthMessage('Bienvenido de nuevo.', 'success');
+}
+
+function initializeAuth() {
+    const authBtn = document.getElementById('auth-btn');
+    const logoutBtn = document.getElementById('auth-logout-btn');
+    const tabs = document.querySelectorAll('.auth-tab');
+    const authForm = document.getElementById('auth-form');
+
+    if (authBtn) {
+        authBtn.addEventListener('click', () => {
+            openAuthModal('login');
+        });
+    }
+
+    if (logoutBtn) {
+        logoutBtn.addEventListener('click', logoutUser);
+    }
+
+    tabs.forEach(tab => {
+        tab.addEventListener('click', () => setAuthMode(tab.dataset.mode));
+    });
+
+    if (authForm) {
+        authForm.addEventListener('submit', handleAuthFormSubmit);
+    }
+
+    document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape') {
+            closeAuthModal();
+        }
+    });
+
+    updateAuthUI();
+}
+
+function createProductCard(product) {
+    const priceText = product.price || '$0.00 MXN*';
+    const priceNumber = parsePriceText(priceText);
+    const descriptionHtml = escapeHtml(product.description || '').replace(/\n/g, '<br>');
+    const noteHtml = product.note ? `<p><small><em>${escapeHtml(product.note)}</em></small></p>` : '';
+    const imageHtml = product.imageSrc
+        ? `<div class="product-image-container"><img src="${escapeHtml(product.imageSrc)}" alt="${escapeHtml(product.title)}" class="product-img" loading="lazy"></div>`
+        : `<div class="product-image-container placeholder"><span>Imagen disponible</span></div>`;
+
+    return `
+        <div class="product-card" data-category="${escapeHtml(product.category)}" data-product-id="${escapeHtml(product.id)}">
+            <div class="product-summary">
+                ${imageHtml}
+                <div class="product-basic-info">
+                    <h3>${escapeHtml(product.title)}</h3>
+                    <p class="product-subtitle">${escapeHtml(product.subtitle)}</p>
+                    <p class="price">${escapeHtml(priceText)}</p>
+                </div>
+                <span class="expand-icon"><i class="fa-solid fa-chevron-down"></i></span>
+            </div>
+            <div class="product-details">
+                <div class="details-content">
+                    <p class="description">${descriptionHtml}</p>
+                    ${noteHtml}
+                    <button class="buy-btn" onclick="addToCart('${escapeJsString(product.title)}', ${priceNumber}, '${escapeJsString(product.id)}')">
+                        Añadir al carrito
+                    </button>
+                </div>
+            </div>
+        </div>
+    `;
+}
+
+function renderProductsGrid() {
+    const container = document.querySelector('.products-grid');
+    if (!container) return;
+    container.innerHTML = '';
+
+    productsCatalog.forEach(product => {
+        const productCardHtml = createProductCard(product);
+        container.insertAdjacentHTML('beforeend', productCardHtml);
+    });
+}
+
+async function loadProducts() {
+    const container = document.querySelector('.products-grid');
+    if (!container) return;
+
+    try {
+        const response = await fetch('productos.json', { cache: 'no-cache' });
+        if (!response.ok) {
+            throw new Error(`HTTP ${response.status} ${response.statusText}`);
+        }
+        productsCatalog = await response.json();
+    } catch (error) {
+        console.error('Error cargando productos:', error);
+        container.innerHTML = '<p class="load-error">No se pudieron cargar los productos. Vuelve a cargar la página o revisa tu conexión.</p>';
+        return;
+    }
+
+    renderProductsGrid();
+    sortProductsByCategory();
+    decorateProductCards();
+    applyCategoryColors();
+    filterCategory('all');
+    initializeProductViewer();
+    addPriceBadges();
+}
+
 function sortProductsByCategory() {
     const order = ['accesorios', '4life', 'refaccionaria', 'hogar-extras', 'servicios'];
     const container = document.querySelector('.products-grid');
@@ -431,7 +718,6 @@ function renderProductViewer(productData) {
                 <button class="viewer-close-circle" onclick="closeProductViewer()" aria-label="Cerrar visor">
                     <img src="img/logo.jpeg" alt="Polarcsx logo" class="viewer-close-logo">
                 </button>
-                <p class="viewer-close-text">Toca aquí para salir.</p>
                 <div class="viewer-gallery-placeholder">
                     <span>Espacio para imágenes adicionales</span>
                 </div>
@@ -653,29 +939,19 @@ function applyProductFilters() {
 // Inicializa mostrando todos los productos al cargar la página
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', () => {
-        renderRefaccionariaProducts();
-        sortProductsByCategory();
-        decorateProductCards();
-        filterCategory('all');
+        loadProducts();
         updateCartUI();
-        initializeProductViewer();
         initializeLogoScroll();
         initCookieBanner();
-        addPriceBadges();
-        applyCategoryColors();
+        initializeAuth();
         registerServiceWorker();
     });
 } else {
-    renderRefaccionariaProducts();
-    sortProductsByCategory();
-    decorateProductCards();
-    filterCategory('all');
+    loadProducts();
     updateCartUI();
-    initializeProductViewer();
     initializeLogoScroll();
     initCookieBanner();
-    addPriceBadges();
-    applyCategoryColors();
+    initializeAuth();
     registerServiceWorker();
 }
 

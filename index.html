@@ -104,8 +104,44 @@
             <h1>Bienvenidos</h1>
             <p>Descubre nuestra selección exclusiva.</p>
         </div>
+        <div class="header-actions">
+            <button id="auth-btn" class="auth-btn" type="button">
+                <i class="fa-solid fa-user"></i>
+                <span id="auth-btn-label">Iniciar sesión</span>
+            </button>
+            <button id="auth-logout-btn" class="auth-logout-btn" type="button" style="display:none;">Cerrar sesión</button>
+        </div>
     </div>
 </header>
+
+<div id="auth-modal" class="auth-modal" aria-hidden="true">
+    <div class="auth-modal-backdrop" onclick="closeAuthModal()"></div>
+    <div class="auth-modal-card" role="dialog" aria-modal="true" aria-labelledby="auth-modal-title">
+        <button class="auth-modal-close" type="button" onclick="closeAuthModal()" aria-label="Cerrar">×</button>
+        <h3 id="auth-modal-title">Iniciar sesión</h3>
+        <div class="auth-tabs">
+            <button class="auth-tab active" type="button" data-mode="login">Iniciar sesión</button>
+            <button class="auth-tab" type="button" data-mode="register">Crear cuenta</button>
+        </div>
+        <div id="auth-message" class="auth-message" role="status"></div>
+        <form id="auth-form" class="auth-form">
+            <div id="auth-name-group" class="auth-field" style="display:none;">
+                <label for="auth-name">Nombre</label>
+                <input id="auth-name" name="name" type="text" placeholder="Tu nombre" autocomplete="name">
+            </div>
+            <div class="auth-field">
+                <label for="auth-email">Correo</label>
+                <input id="auth-email" name="email" type="email" placeholder="tu@email.com" autocomplete="email" required>
+            </div>
+            <div class="auth-field">
+                <label for="auth-password">Contraseña</label>
+                <input id="auth-password" name="password" type="password" placeholder="••••••••" autocomplete="current-password" required>
+            </div>
+            <button id="auth-submit-btn" class="auth-submit-btn" type="submit">Entrar</button>
+        </form>
+    </div>
+</div>
+
 <!-- ============================================
      CATÁLOGO Y BARRA DE CATEGORÍAS
      ============================================ -->
