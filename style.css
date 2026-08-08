@@ -109,6 +109,42 @@ body {
     border-color: #ffffff;
     box-shadow: 0 0 20px rgba(187, 134, 252, 0.2);
 }
+
+.category-btn[data-category="all"].active {
+    background: #f9bc0d;
+    color: #000;
+    border-color: #facc15;
+}
+
+.category-btn[data-category="accesorios"].active {
+    background: #ff5555;
+    color: #fff;
+    border-color: #ff8a8a;
+}
+
+.category-btn[data-category="4life"].active {
+    background: #2dd4bf;
+    color: #000;
+    border-color: #67f9e8;
+}
+
+.category-btn[data-category="refaccionaria"].active {
+    background: #f97316;
+    color: #000;
+    border-color: #fb923c;
+}
+
+.category-btn[data-category="hogar-extras"].active {
+    background: #8b5cf6;
+    color: #fff;
+    border-color: #a78bfa;
+}
+
+.category-btn[data-category="servicios"].active {
+    background: #38bdf8;
+    color: #000;
+    border-color: #7dd3fc;
+}
 .product-subtitle{
     color: #ff00ff;
     font-size: 0.85rem;
@@ -187,19 +223,24 @@ body {
     object-fit: contain;
 }
 
-.price {
+.product-summary .price {
+    display: none;
+}
+
+
+.details-price {
     display: inline-flex;
     align-items: center;
     gap: 0.35rem;
-    margin-top: 8px;
-    color: #ccd6f6;
-    font-size: 0.95rem;
+    margin: 14px 0 0;
+    color: #f8fafc;
+    font-size: 1rem;
     font-weight: 700;
 }
 
-.price::before {
+.details-price::before {
     content: "Precio";
-    font-size: 0.8rem;
+    font-size: 0.78rem;
     color: #8ca6ff;
 }
 
@@ -602,13 +643,14 @@ CARRITO MODAL - OVERLAY STYLE
     inset:0;
     z-index: 98;
     display: none;
-    align-items: flex-end;
+    align-items: flex-start;
     justify-content: center;
+    padding-top: 80px;
 }
 
 .cart-modal.open {
     display: flex;
-    z-index: 3100;
+    z-index: 10001;
 }
 
 .cart-modal-overlay {
@@ -738,6 +780,7 @@ CARRITO MODAL - OVERLAY STYLE
     border-radius: 28px;
     background: linear-gradient(135deg, #1a1a1a 0%, #0d0d0d 100%);
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+    position: relative;
 }
 
 .viewer-image img {
@@ -750,6 +793,62 @@ CARRITO MODAL - OVERLAY STYLE
 
 .viewer-image:hover img {
     transform: scale(1.03);
+}
+
+.viewer-gallery-placeholder {
+    margin-top: 18px;
+    padding: 18px;
+    border: 1px solid rgba(249, 115, 22, 0.35);
+    border-radius: 20px;
+    background: rgba(0, 0, 0, 0.4);
+    color: #d1d1d1;
+    font-size: 0.9rem;
+    min-height: 140px;
+    display: grid;
+    place-items: center;
+    text-align: center;
+    transition: box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.viewer-gallery-placeholder:hover {
+    box-shadow: 0 0 15px rgba(249, 115, 22, 0.55), 0 0 30px rgba(249, 115, 22, 0.35);
+    border-color: rgba(249, 115, 22, 0.65);
+}
+
+.viewer-close-circle {
+    position: absolute;
+    bottom: -22px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    border: 1px solid rgba(249, 115, 22, 0.45);
+    background: rgba(10, 10, 10, 0.95);
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    transition: box-shadow 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+
+.viewer-close-circle:hover {
+    box-shadow: 0 0 15px rgba(249, 115, 22, 0.75), 0 0 30px rgba(249, 115, 22, 0.45);
+    border-color: rgba(249, 115, 22, 0.85);
+    transform: translateX(-50%) scale(1.03);
+}
+
+.viewer-close-logo {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+    border-radius: 50%;
+}
+
+.viewer-close-text {
+    margin: 8px auto 0;
+    color: #d1d1d1;
+    font-size: 0.85rem;
+    text-align: center;
 }
 
 .viewer-info {
@@ -1060,13 +1159,46 @@ CARRITO MODAL - OVERLAY STYLE
     width: 100%;
     padding: 16px 20px;
     border: none;
-    border-radius: 12px;
+    border-radius: 999px;
     font-size: 0.95rem;
     font-weight: 700;
     cursor: pointer;
     transition: all 0.2s ease;
     letter-spacing: 0.5px;
     text-transform: uppercase;
+}
+
+.viewer-viewcart-btn {
+    background: #f9bc0d;
+    color: #101010;
+    box-shadow: 0 0 12px rgba(249, 188, 13, 0.16);
+    border: 1px solid rgba(249, 188, 13, 0.45);
+}
+
+.viewer-viewcart-btn:hover {
+    box-shadow: 0 0 18px rgba(249, 188, 13, 0.45), 0 0 30px rgba(249, 188, 13, 0.25);
+    transform: translateY(-1px);
+}
+
+.viewer-cart-btn {
+    background: #1f1f23;
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+.viewer-cart-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.viewer-buy-btn {
+    background: linear-gradient(90deg, #25D366, #0db14b);
+    color: #000;
+    box-shadow: 0 8px 24px rgba(37, 211, 102, 0.3);
+}
+
+.viewer-buy-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 32px rgba(37, 211, 102, 0.4);
 }
 
 .viewer-qty-controls {
@@ -1292,8 +1424,26 @@ filter:brightness(1.15);
     padding: 20px;
     max-width: 1200px;
     margin: 0 auto;
-    /* Evita que una tarjeta estire a las vecinas cuando abras el acordeón */
-    align-items: start; 
+    align-items: stretch;
+}
+
+.product-card {
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 24px;
+    background: #0d1117;
+    overflow: hidden;
+    box-sizing: border-box;
+    transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.product-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(249, 115, 22, 0.35);
+    box-shadow: 0 14px 40px rgba(0,0,0,0.25);
+}
+
+.product-card .product-summary {
+    padding: 18px;
 }
 
     .section-title {
@@ -1321,6 +1471,23 @@ filter:brightness(1.15);
         max-width: 720px;
         line-height: 1.6;
     }
+
+.refaccionaria-title {
+    background: transparent;
+    border-color: transparent;
+    box-shadow: none;
+    padding: 0;
+}
+
+.refaccionaria-title .section-title-text {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.refaccionaria-title .section-title-text h2 {
+    margin-bottom: 0;
+}
 
     .product-image-container.placeholder {
         background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
@@ -1872,11 +2039,11 @@ filter:brightness(1.15);
 }
 
 .qty-btn {
-    width: 28px;
-    height: 28px;
-    border-radius: 50%;
-    border: 1px solid #444;
-    background: #1f1f1f;
+    width: 30px;
+    height: 30px;
+    border-radius: 10px;
+    border: 1px solid rgba(255,255,255,0.18);
+    background: rgba(255,255,255,0.06);
     color: #fff;
     font-size: 1.1rem;
     line-height: 1;
@@ -1884,12 +2051,20 @@ filter:brightness(1.15);
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: background 0.2s ease;
+    transition: background 0.2s ease, border-color 0.2s ease;
 }
 
 .qty-btn:hover {
-    background: #333;
+    background: rgba(255,255,255,0.12);
     border-color: #c5a059;
+}
+
+.viewer-qty-controls .qty-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    font-size: 1.2rem;
+    background: rgba(255,255,255,0.09);
 }
 
 .qty-value {

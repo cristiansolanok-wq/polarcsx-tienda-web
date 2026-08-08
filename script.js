@@ -66,16 +66,16 @@ const BRAND_LINKS = {
 // ya no es un solo morado plano para todo el catálogo.
 // ========================================
 const CATEGORY_COLORS = {
-    '4life':                 '#2dd4bf', // teal — bienestar general
-    'bienestar-integral':    '#a78bfa', // violeta
-    'salud-femenina':        '#f472b6', // rosa
-    'salud-masculina':       '#60a5fa', // azul acero
-    'sistema-inmunologico':  '#facc15', // ámbar
-    'energia-vitalidad':     '#fb923c', // naranja
-    'salud-digestiva':       '#a3e635', // verde lima
+    '4life':                 '#2dd4bf', // turquesa 4Life
+    'bienestar-integral':    '#2dd4bf', // mismo turquesa 4Life
+    'salud-femenina':        '#2dd4bf', // mismo turquesa 4Life
+    'salud-masculina':       '#2dd4bf', // mismo turquesa 4Life
+    'sistema-inmunologico':  '#2dd4bf', // mismo turquesa 4Life
+    'energia-vitalidad':     '#2dd4bf', // mismo turquesa 4Life
+    'salud-digestiva':       '#2dd4bf', // mismo turquesa 4Life
     'postres':                '#ff6ec7', // magenta postres
-    'accesorios':             '#22d3ee', // turquesa
-    'refaccionaria':          '#f97316', // naranja/refacciones
+    'accesorios':             '#ff5555', // rojo de la identidad actual
+    'refaccionaria':          '#f97316', // naranja de refaccionaria
     'servicios':               '#38bdf8', // azul claro
 };
 
@@ -85,6 +85,37 @@ function applyCategoryColors() {
         if (!subtitle) return;
         const color = CATEGORY_COLORS[card.dataset.category];
         if (color) subtitle.style.color = color;
+    });
+}
+
+function sortProductsByCategory() {
+    const order = ['accesorios', '4life', 'refaccionaria', 'hogar-extras', 'servicios'];
+    const container = document.querySelector('.products-grid');
+    if (!container) return;
+
+    const cards = Array.from(container.querySelectorAll('.product-card'));
+    cards.sort((a, b) => {
+        const indexA = order.indexOf(a.dataset.category) >= 0 ? order.indexOf(a.dataset.category) : order.length;
+        const indexB = order.indexOf(b.dataset.category) >= 0 ? order.indexOf(b.dataset.category) : order.length;
+        return indexA - indexB;
+    });
+
+    cards.forEach(card => container.appendChild(card));
+}
+
+function decorateProductCards() {
+    document.querySelectorAll('.product-card').forEach(card => {
+        const subtitle = card.querySelector('.product-subtitle');
+        if (!subtitle) return;
+
+        const detailsContent = card.querySelector('.details-content');
+        const priceEl = card.querySelector('.product-summary .price');
+        if (detailsContent && priceEl && !card.querySelector('.details-price')) {
+            const detailsPrice = document.createElement('p');
+            detailsPrice.className = 'details-price';
+            detailsPrice.textContent = priceEl.textContent.trim();
+            detailsContent.insertBefore(detailsPrice, detailsContent.firstChild);
+        }
     });
 }
 
@@ -127,15 +158,8 @@ function renderRefaccionariaProducts() {
     const container = document.querySelector('.products-grid');
     if (!container) return;
 
-    const sectionHeading = document.createElement('div');
-    sectionHeading.className = 'section-title refaccionaria-title';
-    sectionHeading.innerHTML = `
-        <div class="section-title-text">
-            <h2>Refaccionaria de alta rotación</h2>
-            <p>Productos básicos para tu taller y tu tienda, seleccionados por su demanda continua.</p>
-        </div>
-    `;
-    container.appendChild(sectionHeading);
+    const insertionPoint = container.querySelector('.product-card[data-category="hogar-extras"]')
+        || container.querySelector('.product-card[data-category="servicios"]');
 
     REFACCIONARIA_PRODUCTS.forEach(product => {
         const card = document.createElement('div');
@@ -171,7 +195,11 @@ function renderRefaccionariaProducts() {
             </div>
         `;
 
-        container.appendChild(card);
+        if (insertionPoint) {
+            container.insertBefore(card, insertionPoint);
+        } else {
+            container.appendChild(card);
+        }
     });
 }
 
@@ -393,11 +421,19 @@ function renderProductViewer(productData) {
     }
 
     // Render complete viewer
+    viewerState.currentQty = 1;
     modalBody.innerHTML = `
         <div class="viewer-card">
             <div class="viewer-image-section">
                 <div class="viewer-image">
                     <img src="${productData.imageSrc}" alt="${productData.title}">
+                </div>
+                <button class="viewer-close-circle" onclick="closeProductViewer()" aria-label="Cerrar visor">
+                    <img src="img/logo.jpeg" alt="Polarcsx logo" class="viewer-close-logo">
+                </button>
+                <p class="viewer-close-text">Toca aquí para salir.</p>
+                <div class="viewer-gallery-placeholder">
+                    <span>Espacio para imágenes adicionales</span>
                 </div>
             </div>
             <div class="viewer-info">
@@ -427,22 +463,23 @@ function renderProductViewer(productData) {
                     <span><i class="fa-solid fa-lock"></i> Pago seguro</span>
                     <span><i class="fa-brands fa-whatsapp"></i> Soporte directo</span>
                 </div>
-                
-                <p class="viewer-hint top">Presiona la X en la esquina superior para cerrar el panel.</p>
 
-<div class="viewer-actions">
-    <button class="viewer-buy-btn" onclick="buyNowWhatsApp('${productData.title.replace(/'/g, "\\'")}', ${productData.price}, viewerState.currentQty)">
-        Comprar ahora
-    </button>
-    <button class="viewer-cart-btn" onclick="addToCart('${productData.title.replace(/'/g, "\\'")}', ${productData.price}, '${productData.id}', viewerState.currentQty); this.textContent='✓ Añadido';setTimeout(()=>{this.textContent='Añadir al carrito';},1500);">
-        Añadir al carrito
-    </button>
-</div>
-<div class="viewer-qty-controls">
-    <button class="qty-btn" onclick="changeViewerQty(-1)">−</button>
-    <span id="viewer-qty-value" class="qty-value">1</span>
-    <button class="qty-btn" onclick="changeViewerQty(1)">+</button>
-</div>
+                <div class="viewer-actions">
+                    <button class="viewer-viewcart-btn" onclick="openCartModal()">
+                        Ver Carrito
+                    </button>
+                    <button class="viewer-cart-btn" onclick="addToCart('${productData.title.replace(/'/g, "\\'")}', ${productData.price}, '${productData.id}', viewerState.currentQty); this.textContent='✓ Añadido';setTimeout(()=>{this.textContent='Añadir al carrito';},1500);">
+                        Añadir al carrito
+                    </button>
+                    <button class="viewer-buy-btn" onclick="buyNowWhatsApp('${productData.title.replace(/'/g, "\\'")}', ${productData.price}, viewerState.currentQty)">
+                        Comprar ahora
+                    </button>
+                </div>
+                <div class="viewer-qty-controls">
+                    <button class="qty-btn" onclick="changeViewerQty(-1)">−</button>
+                    <span id="viewer-qty-value" class="qty-value">1</span>
+                    <button class="qty-btn" onclick="changeViewerQty(1)">+</button>
+                </div>
             </div>
         </div>
     `;
@@ -617,6 +654,8 @@ function applyProductFilters() {
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', () => {
         renderRefaccionariaProducts();
+        sortProductsByCategory();
+        decorateProductCards();
         filterCategory('all');
         updateCartUI();
         initializeProductViewer();
@@ -624,9 +663,12 @@ if (document.readyState === 'loading') {
         initCookieBanner();
         addPriceBadges();
         applyCategoryColors();
+        registerServiceWorker();
     });
 } else {
     renderRefaccionariaProducts();
+    sortProductsByCategory();
+    decorateProductCards();
     filterCategory('all');
     updateCartUI();
     initializeProductViewer();
@@ -634,6 +676,7 @@ if (document.readyState === 'loading') {
     initCookieBanner();
     addPriceBadges();
     applyCategoryColors();
+    registerServiceWorker();
 }
 
 // ========================================
@@ -643,6 +686,14 @@ if (document.readyState === 'loading') {
 // mostrar — por eso el botón empieza oculto en el HTML.
 // ========================================
 let deferredInstallPrompt = null;
+
+function registerServiceWorker() {
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('/sw.js').catch(() => {
+            // Si no se puede registrar el service worker, no rompemos la página.
+        });
+    }
+}
 
 window.addEventListener('beforeinstallprompt', (event) => {
     event.preventDefault();
